@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>ALCASYS DS — Komunikačné riešenia pre železničnú dopravu</title>
+<title>ALCASYS DS — Komunikačné systémy a informačné riešenia pre dopravu a priemysel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
@@ -58,6 +58,7 @@
   }
   header .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;}
   .logo-img{height:34px;display:block;}
+  header .logo-img{height:52px;}
   nav ul{display:flex;gap:28px;list-style:none;font-size:14px;color:var(--gray);}
   nav a:hover{color:var(--ink);}
   .cta{
@@ -107,14 +108,23 @@
   .clients .label{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;}
   .client-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
   .chip-img{
-    height:30px;max-width:110px;object-fit:contain;
+    height:38px;width:110px;object-fit:contain;
     background:#fff;border:1px solid var(--line);padding:8px 14px;
+    filter:grayscale(1) opacity(0.65);transition:filter 0.2s ease;
   }
-  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:52px;align-items:center;}
-  .hero-visual{position:relative;}
-  .hero-visual img{width:100%;height:340px;object-fit:cover;object-position:center 60%;border:1px solid var(--line);display:block;}
+  .chip-img:hover{filter:grayscale(0) opacity(1);}
+  .chip-img-small{padding:14px 18px;}
+  .chip-frame{display:inline-flex;align-items:center;justify-content:center;overflow:hidden;box-sizing:content-box;}
+  .chip-frame img{max-width:100%;max-height:100%;object-fit:contain;transform:scale(1.4);}
+  .chip{
+    font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--gray);
+    border:1px solid var(--line);background:#fff;padding:9px 16px;
+    height:38px;box-sizing:border-box;display:flex;align-items:center;
+  }
+  .hero-visual{position:relative;margin:40px 0 44px;}
+  .hero-visual img{width:100%;height:360px;object-fit:cover;object-position:center 55%;border:1px solid var(--line);display:block;}
   .dot-accent{position:absolute;top:14px;right:14px;width:56px;height:56px;fill:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.35));}
-  @media (max-width:900px){ .hero-grid{grid-template-columns:1fr;} .hero-visual{order:-1;} .hero-visual img{height:220px;} }
+  @media (max-width:700px){ .hero-visual img{height:220px;} }
 
   .station{
     position:relative;
@@ -145,12 +155,20 @@
     display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
     gap:1px;background:var(--line);border:1px solid var(--line);max-width:900px;
   }
-  .feature{background:#fff;padding:20px 22px;}
+  .feature{background:#fff;padding:20px 22px;display:block;transition:background 0.15s ease;}
+  a.feature:hover{background:var(--bg-alt);}
   .feature .ft{font-weight:600;font-size:14.5px;margin-bottom:6px;color:var(--ink);}
   .feature .fd{font-size:13.5px;color:var(--gray);line-height:1.55;}
+  .back-link{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--red);
+  }
+  .back-link:hover{color:var(--red-dark);}
   .station-photos{display:grid;grid-template-columns:1fr 1fr;gap:12px;max-width:900px;margin-top:12px;}
   .station-photos img{width:100%;height:180px;object-fit:cover;border:1px solid var(--line);display:block;}
   @media (max-width:600px){ .station-photos{grid-template-columns:1fr;} }
+  .diagram-card{background:#fff;padding:20px;border:1px solid var(--line);margin-top:28px;max-width:512px;}
+  .diagram-card img{width:100%;height:auto;display:block;}
 
   .cert-row{display:flex;gap:14px;flex-wrap:wrap;max-width:700px;}
   .cert{
@@ -159,24 +177,40 @@
     display:flex;align-items:center;gap:10px;
   }
   .cert-badge{height:56px;width:auto;background:#fff;border:1px solid var(--line);padding:14px 20px;}
+  .cert-badge-iso{height:67px;padding:8px 14px;}
+  .cert-badge-en{height:72px;padding:6px 12px;}
 
-  .partner-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;max-width:760px;}
+  .partner-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;max-width:780px;}
   .partner-row a{display:block;line-height:0;}
   .partner-row a:hover .partner-img{border-color:var(--gray);}
   .partner{
     font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--gray);
     border:1px solid var(--line);padding:9px 15px;background:#fff;
   }
-  .partner-img{height:26px;max-width:120px;object-fit:contain;background:#fff;border:1px solid var(--line);padding:8px 14px;}
+  .partner-img{
+    height:52px;width:130px;object-fit:contain;background:#fff;border:1px solid var(--line);padding:8px 14px;
+    box-sizing:border-box;filter:grayscale(1) opacity(0.65);transition:filter 0.2s ease;
+  }
+  .partner-img:hover{filter:grayscale(0) opacity(1);}
+  .partner-img-lg{object-fit:contain;padding:6px 8px;}
 
   .final-cta .cta-person{
-    display:block;width:64px;height:64px;object-fit:cover;border-radius:50%;
+    display:block;width:77px;height:77px;object-fit:cover;border-radius:50%;
     margin:28px auto 0;border:1px solid var(--line);
   }
 
   .final-cta{padding:88px 0;text-align:center;border-top:1px solid var(--line);background:var(--bg-alt);}
   .final-cta h2{font-size:clamp(30px,4.4vw,46px);margin-bottom:18px;color:var(--ink);}
   .final-cta p{color:var(--gray);max-width:480px;margin:0 auto 34px;font-family:'IBM Plex Sans',sans-serif;}
+  .contact-card{
+    display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);
+    border:1px solid var(--line);max-width:640px;margin:44px auto 0;text-align:left;
+  }
+  .contact-col{background:#fff;padding:26px 28px;}
+  .contact-col .ft-title{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
+  .contact-col p{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink);line-height:1.7;max-width:none;margin:0 0 10px;}
+  .contact-col p:last-child{margin-bottom:0;}
+  @media (max-width:600px){ .contact-card{grid-template-columns:1fr;} }
 
   footer{border-top:1px solid var(--line);background:var(--ink);color:#C7C9CB;padding:56px 0 28px;}
   .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
@@ -209,38 +243,28 @@
 
   <header>
     <div class="wrap nav-inner">
-      <img class="logo-img" src="images/LogoDS.png" alt="ALCASYS DS">
+      <img class="logo-img" src="images/logo-alcasysds.png" alt="ALCASYS DS">
       <nav>
         <ul>
           <li><a href="#pis">Informačné systémy</a></li>
-          <li><a href="#infra">Kritická infraštruktúra</a></li>
+          <li><a href="#infra">Infraštruktúra</a></li>
+          <li><a href="#cyber">Kyberbezpečnosť</a></li>
           <li><a href="#cert">Certifikácie</a></li>
           <li><a href="#partneri">Partneri</a></li>
         </ul>
       </nav>
-      <a class="cta" href="#kontakt">Naplánovať konzultáciu</a>
+      <a class="cta" href="#kontakt">Dohodnime si termín</a>
     </div>
   </header>
 
   <section class="hero">
-    <div class="wrap hero-grid">
-      <div class="hero-copy">
-        <div class="eyebrow">Komunikačné a informačné systémy</div>
-        <h1>Komunikačné a informačné systémy<br><span class="h1-sub">pre železničnú dopravu</span></h1>
-        <p class="lead">Technológie a know-how, na ktorých stoja informačné systémy pre cestujúcich a kritická komunikačná infraštruktúra vo vlakovej doprave.</p>
-        <div class="hero-actions">
-          <a class="btn-primary" href="#kontakt">Naplánovať konzultáciu</a>
-          <a class="btn-ghost" href="#pis">Prezrieť riešenia</a>
-        </div>
-        <div class="clients">
-          <div class="label">Dôverujú nám</div>
-          <div class="client-row">
-            <img class="chip-img" src="https://www.alcasys.sk/img/uploaded/nw/10798-zoz-jpg-preview.jpg" alt="ZOZ">
-            <img class="chip-img" src="https://www.alcasys.sk/img/uploaded/nw/10802-Zeleznicna-spolocnost-Slovensko-logo-svg-png-preview.png" alt="Železničná spoločnosť Slovensko">
-            <img class="chip-img" src="https://www.alcasys.sk/img/uploaded/nw/10800-Bez-nazvu-1-jpg-preview.jpg" alt="Zákazník">
-            <img class="chip-img" src="https://www.alcasys.sk/img/uploaded/nw/10801-zsr-jpg-preview.jpg" alt="ŽSR">
-          </div>
-        </div>
+    <div class="wrap">
+      <div class="eyebrow">Komunikačné a informačné systémy</div>
+      <h1>Komunikačné systémy<br><span class="h1-sub">a informačné riešenia pre dopravu a priemysel</span></h1>
+      <p class="lead">Technológie a know-how, na ktorých stoja informačné systémy pre cestujúcich, kritická komunikačná infraštruktúra a kybernetická bezpečnosť sietí.</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#kontakt">Dohodnime si termín</a>
+        <a class="btn-ghost" href="#pis">Prezrieť riešenia</a>
       </div>
       <div class="hero-visual">
         <img src="images/hero-train.jpg" alt="Vlak ZSSK Stadler KISS">
@@ -250,6 +274,16 @@
           <circle cx="4" cy="28" r="2.4"/><circle cx="16" cy="28" r="2.4"/><circle cx="28" cy="28" r="2.4"/><circle cx="40" cy="28" r="2.4"/>
           <circle cx="4" cy="40" r="2.4"/><circle cx="16" cy="40" r="2.4"/><circle cx="28" cy="40" r="2.4"/><circle cx="40" cy="40" r="2.4"/>
         </svg>
+      </div>
+      <div class="clients">
+        <div class="label">Dôverujú nám</div>
+        <div class="client-row">
+          <img class="chip-img" src="images/client-zssk.png" alt="ZSSK">
+          <img class="chip-img chip-img-small" src="images/client-zsr.jpg" alt="ŽSR">
+          <img class="chip-img" src="images/client-zos.jpg" alt="ŽOS Zvolen">
+          <img class="chip-img" src="images/client-slovnaft.jpg" alt="Slovnaft">
+          <span class="chip-img chip-frame"><img src="images/client-slovenske-elektrarne.jpg" alt="Slovenské elektrárne"></span>
+        </div>
       </div>
     </div>
   </section>
@@ -264,16 +298,17 @@
         <h2>Informačné systémy pre cestujúcich (PIS)</h2>
         <p class="desc">WiFi, kamerové systémy, počítanie cestujúcich, informačné displeje a ucelený informačný systém — jedna platforma od nástupu po výstup.</p>
         <div class="feature-grid">
-          <div class="feature"><div class="ft">WiFi pre cestujúcich</div><div class="fd">Pripojenie počas celej jazdy, bez výpadkov medzi stanicami.</div></div>
-          <div class="feature"><div class="ft">LED tabule a LCD monitory</div><div class="fd">Trasa vlaku, výluky, prestupné stanice a informačné spoty.</div></div>
-          <div class="feature"><div class="ft">Počítanie cestujúcich</div><div class="fd">Presné dáta o obsadenosti pre plánovanie kapacít.</div></div>
-          <div class="feature"><div class="ft">Kamerový systém</div><div class="fd">Zvýšená bezpečnosť, inteligentné prepínanie pohľadov pre rušňovodiča.</div></div>
-          <div class="feature"><div class="ft">Hlasová komunikácia</div><div class="fd">Prepojenie vlakového personálu a informovanie cestujúcich.</div></div>
-          <div class="feature"><div class="ft">Pracovisko rušňovodiča</div><div class="fd">Jednotný prístup ku všetkým prvkom PIS a jeho diagnostike.</div></div>
+          <a class="feature" href="pis-momis.html#wifi"><div class="ft">WiFi pre cestujúcich</div><div class="fd">Pripojenie počas celej jazdy, bez výpadkov medzi stanicami.</div></a>
+          <a class="feature" href="pis-momis.html#displeje"><div class="ft">LED tabule a LCD monitory</div><div class="fd">Trasa vlaku, výluky, prestupné stanice a informačné spoty.</div></a>
+          <a class="feature" href="pis-momis.html#pocitanie"><div class="ft">Počítanie cestujúcich</div><div class="fd">Presné dáta o obsadenosti pre plánovanie kapacít.</div></a>
+          <a class="feature" href="pis-momis.html#kamery"><div class="ft">Kamerový systém</div><div class="fd">Zvýšená bezpečnosť, inteligentné prepínanie pohľadov pre rušňovodiča.</div></a>
+          <a class="feature" href="pis-momis.html#komunikacia"><div class="ft">Hlasová komunikácia</div><div class="fd">Prepojenie vlakového personálu a informovanie cestujúcich.</div></a>
+          <a class="feature" href="pis-momis.html#hmi"><div class="ft">Pracovisko rušňovodiča</div><div class="fd">Jednotný prístup ku všetkým prvkom PIS a jeho diagnostike.</div></a>
         </div>
+        <a class="back-link" href="pis-momis.html" style="margin-top:20px;">Viac o systéme MOMIS →</a>
         <div class="station-photos">
-          <img src="https://www.alcasys.sk/img/uploaded/nw/12554_Depositphotos-403640782-L-1120x673-469x0-preview.jpg" alt="Kamerový a informačný systém vo vlaku">
-          <img src="https://www.alcasys.sk/img/uploaded/nw/12556_Depositphotos-72770941-L-preview.jpg" alt="Informačný systém pre cestujúcich">
+          <img src="images/pis-nastupiste.jpg" alt="Nástupište s vlakom vybaveným informačným systémom">
+          <img src="images/pis-ovladanie.jpg" alt="Ovládanie vlaku rušňovodičom">
         </div>
       </div>
     </div>
@@ -283,42 +318,68 @@
       <div class="station-body">
         <span class="station-num">02 / Kritická infraštruktúra</span>
         <h2>Siete, ktoré nesmú vypadnúť</h2>
-        <p class="desc">Takmer 10 rokov ako autorizovaný partner Hitachi ABB Power Grids dodávame riešenia na báze prístupovej a transportnej platformy UMUX 1500 a XMC 20/25.</p>
+        <p class="desc">Sme autorizovaný partner Hitachi Energy a Cisco, dodávame riešenia transportnej siete pre riadenie prevádzky.</p>
         <div class="feature-grid">
           <div class="feature"><div class="ft">Flexibilná koexistencia</div><div class="fd">Natívny TDM aj paketový prenos dát v jednom zariadení.</div></div>
           <div class="feature"><div class="ft">Vysoká dostupnosť</div><div class="fd">Rovnaká škálovateľnosť v TDM aj v MPLS-TP/IP sieťach.</div></div>
-          <div class="feature"><div class="ft">Robustná prevádzka</div><div class="fd">Nízka spotreba energie, prevádzka bez ventilátora.</div></div>
-          <div class="feature"><div class="ft">Šifrovanie dát</div><div class="fd">Kľúče generované hardvérovým kvantovým generátorom náhodného čísla.</div></div>
+          <div class="feature"><div class="ft">Robustná prevádzka</div><div class="fd">Nízka spotreba energie, zariadenia v priemyselnom prevedení.</div></div>
+        </div>
+        <p class="desc" style="margin-top:28px;">Budujeme tiež komunikačné siete LAN a WAN, staviame na osvedčených technológiách od Cisco, Alcatel-Lucent a Extreme Networks.</p>
+        <div class="diagram-card">
+          <img src="images/diagram-lan-wan.png" alt="Schéma prepojenia LAN a WAN sietí s pobočkami">
+        </div>
+      </div>
+    </div>
+
+    <div class="station" id="cyber">
+      <div class="rail"><div class="signal"></div></div>
+      <div class="station-body">
+        <span class="station-num">03 / Kybernetická bezpečnosť</span>
+        <h2>Bezpečné siete od základu</h2>
+        <p class="desc">Viac ako 10 rokov sme certifikovaným Advanced partnerom spoločnosti Fortinet so špecializáciou Secure Networking LAN.</p>
+        <div class="feature-grid">
+          <div class="feature"><div class="ft">Advanced partner Fortinet</div><div class="fd">Certifikácia potvrdená viac ako 10-ročnou praxou v nasadzovaní riešení.</div></div>
+          <div class="feature"><div class="ft">Secure Networking LAN</div><div class="fd">Špecializácia na zabezpečenie prístupových a lokálnych sietí.</div></div>
+          <div class="feature"><div class="ft">Segmentácia siete</div><div class="fd">Oddelenie prevádzkových a bezpečnostných zón v sieťovej infraštruktúre.</div></div>
+        </div>
+        <div class="diagram-card">
+          <img src="images/diagram-network-security.jpg" alt="Prehľad oblastí sieťovej bezpečnosti — NAC, VPN, firewally, LAN Edge, 5G brány, IPS, antivírus a sandboxing">
         </div>
       </div>
     </div>
 
     <div class="station" id="cert">
-      <div class="rail"><div class="signal"></div></div>
+      <div class="rail"><div class="signal green"></div></div>
       <div class="station-body">
-        <span class="station-num">03 / Certifikácie</span>
+        <span class="station-num">04 / Certifikácie</span>
         <h2>Riešenia spĺňajúce prísne normy</h2>
-        <p class="desc">Všetky dodávané zariadenia sú testované a certifikované podľa požiadaviek TSI.</p>
+        <p class="desc">Všetky dodávané zariadenia sú v súlade s požiadavkami platných železničných noriem.</p>
+        <div class="cert-row" style="margin-bottom:28px;">
+          <img class="cert-badge cert-badge-en" src="images/cert-en50155.png" alt="EN 50155">
+          <img class="cert-badge cert-badge-en" src="images/cert-en45545-2.png" alt="EN 45545-2">
+        </div>
+        <p class="desc">ALCASYS DS je certifikovaná spoločnosť podľa noriem ISO 9001, ISO 14001, ISO 27001 a ISO 45001.</p>
         <div class="cert-row">
-          <img class="cert-badge" src="https://www.alcasys.sk/themes/alcasys_new/images/web/icons/iso_9001.svg" alt="ISO 9001">
-          <img class="cert-badge" src="https://www.alcasys.sk/themes/alcasys_new/images/web/icons/iso_14001.svg" alt="ISO 14001">
-          <img class="cert-badge" src="https://www.alcasys.sk/themes/alcasys_new/images/web/icons/iso_27001.svg" alt="ISO 27001">
-          <img class="cert-badge" src="https://www.alcasys.sk/themes/alcasys_new/images/web/icons/iso_45001.svg" alt="ISO 45001">
+          <img class="cert-badge cert-badge-iso" src="images/cert-iso-9001.png" alt="ISO 9001">
+          <img class="cert-badge cert-badge-iso" src="images/cert-iso-14001.png" alt="ISO 14001">
+          <img class="cert-badge cert-badge-iso" src="images/cert-iso-27001.png" alt="ISO 27001">
+          <img class="cert-badge cert-badge-iso" src="images/cert-iso-45001.png" alt="ISO 45001">
         </div>
       </div>
     </div>
 
     <div class="station" id="partneri">
-      <div class="rail"><div class="signal green"></div></div>
+      <div class="rail"><div class="signal"></div></div>
       <div class="station-body">
-        <span class="station-num">04 / Partneri</span>
+        <span class="station-num">05 / Partneri</span>
         <h2>Bez partnerov by to nešlo</h2>
         <p class="desc">Technologických partnerov si starostlivo vyberáme a budujeme s nimi dlhodobé vzťahy.</p>
         <div class="partner-row">
-          <a href="https://www.fortinet.com" target="_blank" rel="noopener"><img class="partner-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Fortinet_logo.svg" alt="Fortinet"></a>
-          <a href="https://www.al-enterprise.com" target="_blank" rel="noopener"><img class="partner-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Alcatel-Lucent_logo.svg" alt="Alcatel-Lucent"></a>
-          <a href="https://www.cisco.com" target="_blank" rel="noopener"><img class="partner-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cisco_logo_blue_2016.svg" alt="Cisco"></a>
-          <a href="https://www.unify.com" target="_blank" rel="noopener"><img class="partner-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/Unify_logo.svg" alt="Unify"></a>
+          <a href="https://www.fortinet.com" target="_blank" rel="noopener"><img class="partner-img" src="images/partner-fortinet.webp" alt="Fortinet"></a>
+          <a href="https://www.al-enterprise.com" target="_blank" rel="noopener"><img class="partner-img partner-img-lg" src="images/partner-alcatel-lucent.jpg" alt="Alcatel-Lucent"></a>
+          <a href="https://www.cisco.com" target="_blank" rel="noopener"><img class="partner-img partner-img-lg" src="images/partner-cisco.jpg" alt="Cisco"></a>
+          <a href="https://www.hitachienergy.com" target="_blank" rel="noopener"><img class="partner-img" src="images/partner-hitachi-energy.svg" alt="Hitachi Energy"></a>
+          <a href="https://www.extremenetworks.com" target="_blank" rel="noopener"><img class="partner-img" src="images/partner-extreme-networks.jpg" alt="Extreme Networks"></a>
         </div>
       </div>
     </div>
@@ -328,11 +389,28 @@
 
   <section class="final-cta" id="kontakt">
     <div class="wrap">
-      <div class="eyebrow" style="justify-content:center;">Konečná stanica</div>
-      <h2>Poďme komunikovať.</h2>
-      <p>Spoločne nájdeme cestu, ako dosiahnuť vaše ciele v komunikačnej infraštruktúre pre dopravu.</p>
+      <div class="eyebrow" style="justify-content:center;">Sme tu pre vás</div>
+      <h2>Pohovorme si o vašom projekte.</h2>
+      <p>Radi si vypočujeme, čo riešite, a spoločne nájdeme najlepší spôsob, ako vám pomôcť.</p>
       <a class="btn-primary" href="mailto:info@alcasyds.eu">Kontaktujte nás</a>
-      <img class="cta-person" src="https://www.alcasys.sk/img/uploaded/nw/10486-dopravci-jpg-preview.jpg" alt="Kolegyňa z tímu ALCASYS DS">
+      <img class="cta-person" src="images/team-kolegyna.jpg" alt="Kolegyňa z tímu ALCASYS DS">
+      <div class="contact-card">
+        <div class="contact-col">
+          <div class="ft-title">Kontakt</div>
+          <p>Alcasys DS, s.r.o.<br>Staré Grunty 36<br>841 04 Bratislava</p>
+          <p>info@alcasyds.eu<br>+421 232 327 711</p>
+        </div>
+        <div class="contact-col">
+          <div class="ft-title">Fakturačné údaje</div>
+          <p>
+            IČO: 56875045<br>
+            DIČ: 2122484056<br>
+            IČ DPH: SK2122484056<br>
+            IBAN: SK29090000000005234020541<br>
+            SWIFT/BIC: GIBASKBX
+          </p>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -340,14 +418,15 @@
     <div class="wrap">
       <div class="foot-grid">
         <div class="foot-brand">
-          <img class="logo-img" src="images/LogoDS.png" alt="ALCASYS DS" style="border-radius:2px;">
-          <p>Komunikačné a informačné riešenia pre železničnú dopravu.</p>
+          <img class="logo-img" src="images/logo-alcasysds.png" alt="ALCASYS DS" style="border-radius:2px;">
+          <p>Komunikačné a informačné riešenia na mieru pre váš business.</p>
         </div>
         <div class="foot-col">
           <div class="ft-title">Riešenia</div>
           <ul>
             <li><a href="#pis">Informačné systémy PIS</a></li>
             <li><a href="#infra">Kritická infraštruktúra</a></li>
+            <li><a href="#cyber">Kybernetická bezpečnosť</a></li>
             <li><a href="#cert">Certifikácie</a></li>
           </ul>
         </div>
@@ -356,7 +435,6 @@
           <ul>
             <li><a href="#">Referencie</a></li>
             <li><a href="#">Kariéra</a></li>
-            <li><a href="#">Blog</a></li>
           </ul>
         </div>
         <div class="foot-col">
@@ -364,12 +442,12 @@
           <ul>
             <li>info@alcasyds.eu</li>
             <li>+421 232 327 711</li>
-            <li>Staré grunty 36, Bratislava</li>
+            <li>Staré Grunty 36, Bratislava</li>
           </ul>
         </div>
       </div>
       <div class="foot-bottom">
-        <span>© 2026 ALCASYS DS, A.S.</span>
+        <span>© 2026 Alcasys DS, s. r. o.</span>
         <span>ALCASYDS.EU</span>
       </div>
     </div>
