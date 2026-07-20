@@ -59,11 +59,14 @@
   header .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;}
   .logo-img{height:34px;display:block;}
   header .logo-img{height:52px;}
-  nav ul{display:flex;gap:28px;list-style:none;font-size:14px;color:var(--gray);}
-  nav a:hover{color:var(--ink);}
+  nav ul{display:flex;gap:24px;list-style:none;font-size:13.5px;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-weight:600;letter-spacing:0.04em;align-items:center;text-transform:uppercase;}
+  nav ul li a{white-space:nowrap;line-height:1.25;}
+  nav a:hover{color:var(--red);}
+  nav a.nav-primary{color:var(--red);font-weight:700;}
+  nav a.nav-primary:hover{color:var(--red-dark);}
   .cta{
     font-family:'IBM Plex Mono',monospace;
-    font-size:13px;
+    font-size:14px;font-weight:600;
     background:var(--red);
     color:#fff;
     padding:11px 20px;
@@ -200,14 +203,14 @@
     border:1px solid var(--line);max-width:640px;margin:44px auto 0;text-align:left;
   }
   .contact-col{background:#fff;padding:26px 28px;}
-  .contact-col .ft-title{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
+  .contact-col .ft-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
   .contact-col p{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink);line-height:1.7;max-width:none;margin:0 0 10px;}
   .contact-col p:last-child{margin-bottom:0;}
   @media (max-width:600px){ .contact-card{grid-template-columns:1fr;} }
 
   footer{border-top:1px solid var(--line);background:var(--ink);color:#C7C9CB;padding:56px 0 28px;}
   .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
-  .foot-col .ft-title{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+  .foot-col .ft-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
   .foot-col ul{list-style:none;}
   .foot-col li{margin-bottom:10px;font-size:14px;color:#9EA1A4;}
   .foot-col li a:hover{color:#fff;}
@@ -224,27 +227,27 @@
     .station-body{padding-left:20px;}
   }
 
-  .breadcrumb{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gray);letter-spacing:0.04em;padding:22px 0 0;}
+  .breadcrumb{font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--gray);letter-spacing:0.04em;padding:22px 0 0;}
   .breadcrumb a{color:var(--gray);}
   .breadcrumb a:hover{color:var(--ink);}
   .breadcrumb span{color:var(--gray-light);margin:0 6px;}
 
   .sub-hero{padding:20px 0 56px;background:var(--bg-alt);border-bottom:1px solid var(--line);}
   .sub-hero .eyebrow{
-    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--red);
-    letter-spacing:0.12em;text-transform:uppercase;margin:24px 0 20px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--red);
+    letter-spacing:0.1em;text-transform:uppercase;margin:24px 0 20px;
     display:flex;align-items:center;gap:10px;
   }
   .sub-hero .eyebrow::before{content:'';width:24px;height:1px;background:var(--red);}
   .sub-hero h1{font-size:clamp(32px,5vw,50px);line-height:1.05;max-width:760px;margin-bottom:20px;color:var(--ink);}
-  .sub-hero p.lead{font-size:17px;color:var(--gray);max-width:640px;font-family:'IBM Plex Sans',sans-serif;text-transform:none;}
+  .sub-hero p.lead{font-size:18px;color:var(--gray);max-width:640px;font-family:'IBM Plex Sans',sans-serif;text-transform:none;}
 
   .sub-section{padding:56px 0;border-bottom:1px solid var(--line);}
   .sub-section .sec-label{
-    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--red);
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--red);
     letter-spacing:0.1em;margin-bottom:14px;display:block;text-transform:uppercase;
   }
-  .sub-section h2{font-size:28px;max-width:640px;margin-bottom:16px;color:var(--ink);}
+  .sub-section h2{font-size:30px;max-width:640px;margin-bottom:16px;color:var(--ink);}
   .sub-section p.desc{color:var(--gray);max-width:680px;margin-bottom:28px;font-size:15.5px;}
 
   .dt-img{width:100%;max-width:640px;height:260px;object-fit:cover;border:1px solid var(--line);display:block;margin-top:22px;}
@@ -263,18 +266,18 @@
   .detail-block{scroll-margin-top:90px;padding:36px 0;border-bottom:1px solid var(--line);}
   .detail-block:last-child{border-bottom:none;padding-bottom:0;}
   .detail-block .dt-num{
-    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--red);
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--red);
     letter-spacing:0.1em;margin-bottom:10px;display:block;text-transform:uppercase;
   }
   .detail-block h3{font-size:22px;color:var(--ink);margin-bottom:12px;}
-  .detail-block p{color:var(--gray);max-width:680px;font-size:15px;}
+  .detail-block p{color:var(--gray);max-width:680px;font-size:15.5px;}
 
   .back-link{
     display:inline-flex;align-items:center;gap:8px;
-    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--gray);
-    margin-top:8px;
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;color:var(--ink);
+    letter-spacing:0.08em;text-transform:uppercase;margin-top:8px;
   }
-  .back-link:hover{color:var(--ink);}
+  .back-link:hover{color:var(--red);}
 </style>
 </head>
 <body>
@@ -291,11 +294,9 @@
       <a href="index.html"><img class="logo-img" src="../images/logo-alcasysds.png" alt="ALCASYS DS"></a>
       <nav>
         <ul>
-          <li><a href="index.html#pis">Information Systems</a></li>
+          <li><a href="pis-momis.html" class="nav-primary">Information Systems PIS</a></li>
           <li><a href="index.html#infra">Infrastructure</a></li>
           <li><a href="index.html#cyber">Cybersecurity</a></li>
-          <li><a href="index.html#cert">Certifications</a></li>
-          <li><a href="index.html#partneri">Partners</a></li>
         </ul>
       </nav>
       <a class="cta" href="index.html#kontakt">Let's talk</a>

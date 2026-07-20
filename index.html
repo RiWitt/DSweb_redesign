@@ -59,11 +59,14 @@
   header .wrap{display:flex;align-items:center;justify-content:space-between;padding-top:14px;padding-bottom:14px;}
   .logo-img{height:34px;display:block;}
   header .logo-img{height:52px;}
-  nav ul{display:flex;gap:28px;list-style:none;font-size:14px;color:var(--gray);}
-  nav a:hover{color:var(--ink);}
+  nav ul{display:flex;gap:24px;list-style:none;font-size:13.5px;color:var(--ink);font-family:'IBM Plex Mono',monospace;font-weight:600;letter-spacing:0.04em;align-items:center;text-transform:uppercase;}
+  nav ul li a{white-space:nowrap;line-height:1.25;}
+  nav a:hover{color:var(--red);}
+  nav a.nav-primary{color:var(--red);font-weight:700;}
+  nav a.nav-primary:hover{color:var(--red-dark);}
   .cta{
     font-family:'IBM Plex Mono',monospace;
-    font-size:13px;
+    font-size:14px;font-weight:600;
     background:var(--red);
     color:#fff;
     padding:11px 20px;
@@ -80,8 +83,8 @@
 
   .hero{padding:80px 0 64px;background:var(--bg-alt);border-bottom:1px solid var(--line);}
   .hero .eyebrow{
-    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--red);
-    letter-spacing:0.12em;text-transform:uppercase;margin-bottom:20px;
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--red);
+    letter-spacing:0.1em;text-transform:uppercase;margin-bottom:20px;
     display:flex;align-items:center;gap:10px;
   }
   .eyebrow::before{content:'';width:24px;height:1px;background:var(--red);}
@@ -120,8 +123,8 @@
   .chip-img:hover{filter:grayscale(0) opacity(1);}
   .chip-img-small{padding:14px 18px;}
   .chip-frame{
-    height:56px;width:140px;box-sizing:border-box;padding:3px;
-    display:inline-flex;align-items:center;justify-content:center;
+    height:38px;width:110px;box-sizing:border-box;padding:2px;overflow:hidden;
+    display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;
     background:#fff;border:1px solid var(--line);
     filter:grayscale(1) opacity(0.65);transition:filter 0.2s ease;
   }
@@ -133,7 +136,7 @@
     height:38px;box-sizing:border-box;display:flex;align-items:center;
   }
   .hero-visual{position:relative;margin:40px 0 44px;}
-  .hero-visual img{width:100%;height:360px;object-fit:cover;object-position:center 55%;border:1px solid var(--line);display:block;}
+  .hero-visual img{width:100%;height:360px;object-fit:cover;object-position:center 50%;border:1px solid var(--line);display:block;}
   .dot-accent{position:absolute;top:14px;right:14px;width:56px;height:56px;fill:#fff;filter:drop-shadow(0 1px 2px rgba(0,0,0,0.35));}
   @media (max-width:700px){ .hero-visual img{height:220px;} }
 
@@ -157,7 +160,7 @@
   .signal.green{border-color:var(--green);}
   .station-body{padding:56px 0 56px 36px;}
   .station-num{
-    font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--red);
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--red);
     letter-spacing:0.1em;margin-bottom:14px;display:block;text-transform:uppercase;
   }
   .station-body h2{font-size:30px;max-width:600px;margin-bottom:16px;color:var(--ink);}
@@ -173,7 +176,8 @@
   .feature .fd{font-size:13.5px;color:var(--gray);line-height:1.55;}
   .back-link{
     display:inline-flex;align-items:center;gap:8px;
-    font-family:'IBM Plex Mono',monospace;font-size:13px;color:var(--red);
+    font-family:'IBM Plex Mono',monospace;font-size:11.5px;font-weight:600;color:var(--red);
+    letter-spacing:0.08em;text-transform:uppercase;
   }
   .back-link:hover{color:var(--red-dark);}
   .station-photos{display:grid;grid-template-columns:1.35fr 1fr;gap:12px;max-width:900px;margin-top:12px;}
@@ -181,6 +185,12 @@
   @media (max-width:600px){ .station-photos{grid-template-columns:1fr;} .station-photos img{height:220px;} }
   .diagram-card{background:#fff;padding:20px;border:1px solid var(--line);margin-top:28px;max-width:512px;}
   .diagram-card img{width:100%;height:auto;display:block;}
+  .infra-sub{margin-top:32px;}
+  .sub-label{
+    font-family:'IBM Plex Mono',monospace;font-size:13px;font-weight:600;color:var(--red);
+    letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;display:block;
+  }
+  .infra-sub-divider{padding-top:32px;border-top:1px solid var(--line);}
 
   .cert-row{display:flex;gap:14px;flex-wrap:wrap;max-width:700px;}
   .cert{
@@ -219,14 +229,14 @@
     border:1px solid var(--line);max-width:640px;margin:44px auto 0;text-align:left;
   }
   .contact-col{background:#fff;padding:26px 28px;}
-  .contact-col .ft-title{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
+  .contact-col .ft-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:12px;}
   .contact-col p{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink);line-height:1.7;max-width:none;margin:0 0 10px;}
   .contact-col p:last-child{margin-bottom:0;}
   @media (max-width:600px){ .contact-card{grid-template-columns:1fr;} }
 
   footer{border-top:1px solid var(--line);background:var(--ink);color:#C7C9CB;padding:56px 0 28px;}
   .foot-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr;gap:32px;margin-bottom:44px;}
-  .foot-col .ft-title{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
+  .foot-col .ft-title{font-family:'IBM Plex Mono',monospace;font-size:12px;font-weight:600;color:var(--red);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:16px;}
   .foot-col ul{list-style:none;}
   .foot-col li{margin-bottom:10px;font-size:14px;color:#9EA1A4;}
   .foot-col li a:hover{color:#fff;}
@@ -241,6 +251,13 @@
     .foot-grid{grid-template-columns:1fr 1fr;}
     .station{grid-template-columns:40px 1fr;}
     .station-body{padding-left:20px;}
+  }
+  @media (max-width:600px){
+    .feature-grid{grid-template-columns:1fr;max-width:100%;}
+  }
+  @media (max-width:420px){
+    .station{grid-template-columns:24px 1fr;}
+    .station-body{padding-left:12px;}
   }
 </style>
 </head>
@@ -258,11 +275,9 @@
       <a href="index.html"><img class="logo-img" src="images/logo-alcasysds.png" alt="ALCASYS DS"></a>
       <nav>
         <ul>
-          <li><a href="#pis">Informačné systémy</a></li>
+          <li><a href="pis-momis.html" class="nav-primary">Informačné systémy PIS</a></li>
           <li><a href="#infra">Infraštruktúra</a></li>
           <li><a href="#cyber">Kyberbezpečnosť</a></li>
-          <li><a href="#cert">Certifikácie</a></li>
-          <li><a href="#partneri">Partneri</a></li>
         </ul>
       </nav>
       <a class="cta" href="#kontakt">Dohodnime si termín</a>
@@ -334,15 +349,24 @@
       <div class="station-body">
         <span class="station-num">Kritická infraštruktúra</span>
         <h2>Siete, ktoré nesmú vypadnúť</h2>
-        <p class="desc">Sme autorizovaný partner Hitachi Energy a Cisco, dodávame riešenia transportnej siete pre riadenie prevádzky.</p>
-        <div class="feature-grid">
-          <div class="feature"><div class="ft">Flexibilná koexistencia</div><div class="fd">Natívna podpora MPLS aj legacy protokolov v jednom zariadení.</div></div>
-          <div class="feature"><div class="ft">Vysoká dostupnosť</div><div class="fd">Rovnaká škálovateľnosť v TDM aj v MPLS-TP/IP sieťach.</div></div>
-          <div class="feature"><div class="ft">Robustná prevádzka</div><div class="fd">Nízka spotreba energie, zariadenia v priemyselnom prevedení.</div></div>
+        <p class="desc">Budujeme a prevádzkujeme sieťovú infraštruktúru, na ktorej stojí riadenie dopravy aj bežná prevádzka firmy — od transportných sietí pre dispečing až po podnikové siete LAN a WAN.</p>
+
+        <div class="infra-sub">
+          <span class="sub-label">Transportná sieť · Hitachi Energy</span>
+          <p class="desc">Sme autorizovaný partner spoločnosti Hitachi Energy a už takmer desať rokov dodávame riešenia transportnej siete pre riadenie prevádzky. Platforma XMC prepája dispečerské pracoviská, staničné zariadenia a systémy zabezpečovacej techniky do jednej odolnej siete, ktorá spĺňa prísne požiadavky na dostupnosť a bezpečnosť aj v náročných prevádzkových podmienkach.</p>
+          <div class="feature-grid">
+            <div class="feature"><div class="ft">Flexibilná koexistencia</div><div class="fd">Natívna podpora MPLS aj legacy protokolov v jednom zariadení.</div></div>
+            <div class="feature"><div class="ft">Vysoká dostupnosť</div><div class="fd">Rovnaká škálovateľnosť v TDM aj v MPLS-TP/IP sieťach.</div></div>
+            <div class="feature"><div class="ft">Robustná prevádzka</div><div class="fd">Nízka spotreba energie, zariadenia v priemyselnom prevedení.</div></div>
+          </div>
         </div>
-        <p class="desc" style="margin-top:28px;">Budujeme tiež komunikačné siete LAN a WAN, staviame na osvedčených technológiách od Cisco, Alcatel-Lucent a Extreme Networks.</p>
-        <div class="diagram-card">
-          <img src="images/diagram-lan-wan.png" alt="Schéma prepojenia LAN a WAN sietí s pobočkami">
+
+        <div class="infra-sub infra-sub-divider">
+          <span class="sub-label">Podnikové siete · LAN a WAN</span>
+          <p class="desc">Popri transportnej sieti budujeme aj podnikové komunikačné siete LAN a WAN — od štruktúrovanej kabeláže cez prepínanú a bezdrôtovú infraštruktúru až po prepojenie viacerých pobočiek do jednej spravovanej siete. Staviame na osvedčených technológiách od Cisco, Alcatel-Lucent a Extreme Networks, s dôrazom na odolnosť, škálovateľnosť a jednoduchú správu.</p>
+          <div class="diagram-card">
+            <img src="images/diagram-lan-wan.png" alt="Schéma prepojenia LAN a WAN sietí s pobočkami">
+          </div>
         </div>
       </div>
     </div>
