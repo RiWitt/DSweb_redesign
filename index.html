@@ -112,7 +112,8 @@
   }
   .btn-ghost:hover{border-color:var(--gray);}
 
-  .clients{border-top:1px solid var(--line);padding-top:26px;}
+  .clients{border-top:1px solid var(--line);padding-top:26px;scroll-margin-top:90px;}
+  .clients-desc{font-size:14px;color:var(--gray);max-width:540px;margin-bottom:16px;}
   .clients .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;}
   .client-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
   .chip-img{
@@ -306,8 +307,9 @@
           <circle cx="4" cy="40" r="2.4"/><circle cx="16" cy="40" r="2.4"/><circle cx="28" cy="40" r="2.4"/><circle cx="40" cy="40" r="2.4"/>
         </svg>
       </div>
-      <div class="clients">
+      <div class="clients" id="referencie">
         <div class="label">Dôverujú nám</div>
+        <p class="clients-desc">Dôverujú nám firmy z oblasti dopravy, energetiky a priemyslu. Snažíme sa pracovať tak, aby náš vzťah so zákazníkom bol vždy dlhodobý a staval na vzájomnej dôvere.</p>
         <div class="client-row">
           <img class="chip-img" src="images/client-zssk.png" alt="ZSSK">
           <img class="chip-img chip-img-small" src="images/client-zsr.jpg" alt="ŽSR">
@@ -473,7 +475,7 @@
         <div class="foot-col">
           <div class="ft-title">O nás</div>
           <ul>
-            <li><a href="#">Referencie</a></li>
+            <li><a href="#referencie">Referencie</a></li>
             <li><a href="o-nas.html">O spoločnosti</a></li>
           </ul>
         </div>

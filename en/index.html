@@ -112,7 +112,8 @@
   }
   .btn-ghost:hover{border-color:var(--gray);}
 
-  .clients{border-top:1px solid var(--line);padding-top:26px;}
+  .clients{border-top:1px solid var(--line);padding-top:26px;scroll-margin-top:90px;}
+  .clients-desc{font-size:14px;color:var(--gray);max-width:540px;margin-bottom:16px;}
   .clients .label{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gray);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:16px;}
   .client-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
   .chip-img{
@@ -306,8 +307,9 @@
           <circle cx="4" cy="40" r="2.4"/><circle cx="16" cy="40" r="2.4"/><circle cx="28" cy="40" r="2.4"/><circle cx="40" cy="40" r="2.4"/>
         </svg>
       </div>
-      <div class="clients">
+      <div class="clients" id="referencie">
         <div class="label">Trusted by</div>
+        <p class="clients-desc">We are trusted by companies from transport, energy, and industry. We aim to work in a way that builds a long-term relationship with our customers, based on mutual trust.</p>
         <div class="client-row">
           <img class="chip-img" src="../images/client-zssk.png" alt="ZSSK">
           <img class="chip-img chip-img-small" src="../images/client-zsr.jpg" alt="ŽSR">
@@ -473,7 +475,7 @@
         <div class="foot-col">
           <div class="ft-title">About Us</div>
           <ul>
-            <li><a href="#">References</a></li>
+            <li><a href="#referencie">References</a></li>
             <li><a href="about.html">About the company</a></li>
           </ul>
         </div>
