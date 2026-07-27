@@ -1,0 +1,76 @@
+---
+import { Font } from 'astro:assets';
+import Ticker from '../components/Ticker.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { ui, languages, type Lang, type PageKey } from '../i18n/ui';
+import { pageUrl } from '../lib/links';
+import '../styles/global.css';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+  title: string;
+  description: string;
+}
+
+const { lang, page, title, description } = Astro.props;
+const t = ui[lang];
+
+const canonical = new URL(pageUrl(lang, page), Astro.site);
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    {/* Tell search engines about the other language version of this same page. */}
+    {
+      languages.map((l) => (
+        <link rel="alternate" hreflang={l} href={new URL(pageUrl(l, page), Astro.site)} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={new URL(pageUrl('sk', page), Astro.site)} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={lang === 'sk' ? 'sk_SK' : 'en_GB'} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {/*
+      Self-hosted, downloaded at build time — no request to Google at runtime.
+
+      Only the display face is preloaded — it renders the large h1, the LCP
+      text. Preloading all three families would put ~240 kB ahead of the hero
+      image for no benefit: the @font-face rules are inlined in this <head>,
+      so the browser discovers body/mono immediately anyway and fetches them
+      via `font-display: swap`.
+
+      Both `latin` and `latin-ext` are preloaded — Slovak headings need the
+      diacritics, so latin-ext is critical here, not optional.
+    */}
+    <Font
+      cssVariable="--font-display"
+      preload={[{ subset: 'latin' }, { subset: 'latin-ext' }]}
+    />
+    <Font cssVariable="--font-body" />
+    <Font cssVariable="--font-mono" />
+  </head>
+
+  <body>
+    <a class="visually-hidden skip-link" href="#main">{t.skipToContent}</a>
+    <Ticker lang={lang} />
+    <Header lang={lang} page={page} />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer lang={lang} page={page} />
+  </body>
+</html>

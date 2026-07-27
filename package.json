@@ -1,0 +1,32 @@
+{
+  "name": "alcasys-ds-web",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "check": "astro check"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RiWitt/DSweb_redesign.git"
+  },
+  "bugs": {
+    "url": "https://github.com/RiWitt/DSweb_redesign/issues"
+  },
+  "homepage": "https://github.com/RiWitt/DSweb_redesign#readme",
+  "description": "ALCASYS DS marketing site (Astro, static, deployed to GitHub Pages)",
+  "dependencies": {
+    "@astrojs/sitemap": "^3.7.3",
+    "astro": "^7.1.3",
+    "sharp": "^0.35.3"
+  },
+  "private": true,
+  "type": "module",
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^6.0.3"
+  }
+}

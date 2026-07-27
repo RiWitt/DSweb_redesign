@@ -1,0 +1,55 @@
+---
+import Base from '../layouts/Base.astro';
+import Breadcrumb from '../components/Breadcrumb.astro';
+import FinalCta from '../components/FinalCta.astro';
+import ValueIcon from '../components/ValueIcon.astro';
+import { about } from '../content/pages';
+import type { Lang } from '../i18n/ui';
+import { pageUrl, homeAnchor } from '../lib/links';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = about[lang];
+
+const hrefFor = (target: 'pis' | 'infra' | 'cyber') =>
+  target === 'pis' ? pageUrl(lang, 'pis') : homeAnchor(lang, 'about', target);
+---
+
+<Base lang={lang} page="about" title={c.title} description={c.description}>
+  <Breadcrumb lang={lang} page="about" trail={[{ label: c.breadcrumb }]} />
+
+  <section class="sub-hero">
+    <div class="wrap">
+      <div class="eyebrow">{c.eyebrow}</div>
+      <h1>{c.heading}</h1>
+      <p class="lead">{c.lead}</p>
+    </div>
+  </section>
+
+  <section class="sub-section">
+    <div class="wrap">
+      <span class="sec-label">{c.sectionLabel}</span>
+      <h2>{c.sectionHeading}</h2>
+      <p class="desc">{c.sectionDesc}</p>
+
+      <div class="value-grid">
+        {
+          c.values.map((v) => (
+            <a class="value-item" href={hrefFor(v.target)}>
+              <ValueIcon name={v.icon} />
+              <div class="vt">{v.title}</div>
+              <div class="vd">{v.desc}</div>
+            </a>
+          ))
+        }
+      </div>
+
+      <a class="back-link" href={pageUrl(lang, 'home')} style="margin-top:28px;">{c.backLink}</a>
+    </div>
+  </section>
+
+  <FinalCta lang={lang} />
+</Base>

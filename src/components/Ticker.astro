@@ -1,0 +1,20 @@
+---
+import { ui, contact, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t = ui[lang];
+---
+
+<div class="ticker">
+  <div class="wrap">
+    <div class="status"><span class="dot"></span>{t.tickerStatus}</div>
+    <div>
+      <a href={`mailto:${contact.email}`}>{contact.email}</a> ·
+      <a href={`tel:${contact.phoneHref}`}>{contact.phone}</a>
+    </div>
+  </div>
+</div>

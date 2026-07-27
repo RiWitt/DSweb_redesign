@@ -1,0 +1,134 @@
+---
+import Img from './Img.astro';
+import { ui, type Lang, type PageKey } from '../i18n/ui';
+import { pageUrl, homeAnchor, asset } from '../lib/links';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+}
+
+const { lang, page } = Astro.props;
+const t = ui[lang];
+
+const navItems = [
+  { href: pageUrl(lang, 'pis'), label: t.navPis, primary: true },
+  { href: homeAnchor(lang, page, 'infra'), label: t.navInfra, primary: false },
+  { href: homeAnchor(lang, page, 'cyber'), label: t.navCyber, primary: false },
+];
+
+// The language switcher points at the *same* page in the other language.
+const ctaHref = homeAnchor(lang, page, 'kontakt');
+---
+
+<header>
+  <div class="wrap nav-inner">
+    <a href={pageUrl(lang, 'home')}>
+      <Img
+        class="logo-img"
+        src="logo-alcasysds.png"
+        alt="ALCASYS DS"
+        widths={[260, 500]}
+        sizes="260px"
+        loading="eager"
+      />
+    </a>
+
+    <button
+      class="nav-toggle"
+      type="button"
+      aria-expanded="false"
+      aria-controls="site-nav"
+      aria-label={t.menuLabel}
+    >
+      <span class="nav-toggle-bars"></span>
+    </button>
+
+    <nav id="site-nav">
+      <ul>
+        {
+          navItems.map((item) => (
+            <li>
+              <a href={item.href} class={item.primary ? 'nav-primary' : undefined}>
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+      <div class="nav-cta-mobile">
+        <a class="cta" href={ctaHref}>{t.navCta}</a>
+      </div>
+    </nav>
+
+    <a class="cta cta-desktop" href={ctaHref}>{t.navCta}</a>
+
+    <div class="lang-switch">
+      <a
+        class={lang === 'sk' ? 'active' : undefined}
+        href={pageUrl('sk', page)}
+        hreflang="sk"
+        aria-label="Slovenčina"
+      >
+        <img src={asset('images/flag-sk.gif')} alt="SK" width="24" height="16" />
+      </a>
+      <a
+        class={lang === 'en' ? 'active' : undefined}
+        href={pageUrl('en', page)}
+        hreflang="en"
+        aria-label="English"
+      >
+        <img src={asset('images/flag-en.gif')} alt="EN" width="24" height="16" />
+      </a>
+    </div>
+  </div>
+</header>
+
+{/* Without JS the drawer can never be opened, so show the links inline instead. */}
+<noscript>
+  <style>
+    @media (max-width: 820px) {
+      .nav-toggle { display: none; }
+      #site-nav { position: static; display: block; box-shadow: none; }
+    }
+  </style>
+</noscript>
+
+<script>
+  const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const nav = document.getElementById('site-nav');
+
+  if (toggle && nav) {
+    const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
+
+    const setOpen = (open: boolean) => {
+      toggle.setAttribute('aria-expanded', String(open));
+      nav.toggleAttribute('data-open', open);
+      document.body.classList.toggle('nav-open', open);
+    };
+
+    toggle.addEventListener('click', () => setOpen(!isOpen()));
+
+    // Anchor links keep you on the page, so close the drawer explicitly.
+    nav.addEventListener('click', (event) => {
+      if ((event.target as HTMLElement).closest('a')) setOpen(false);
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && isOpen()) {
+        setOpen(false);
+        toggle.focus();
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      if (isOpen() && !(event.target as HTMLElement).closest('header')) setOpen(false);
+    });
+
+    // Resizing up to desktop leaves `body.nav-open` stuck otherwise.
+    const desktop = window.matchMedia('(min-width: 821px)');
+    desktop.addEventListener('change', (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+</script>

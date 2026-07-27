@@ -1,0 +1,60 @@
+---
+import Img from './Img.astro';
+import { ui, contact, type Lang, type PageKey } from '../i18n/ui';
+import { pageUrl, homeAnchor } from '../lib/links';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+}
+
+const { lang, page } = Astro.props;
+const t = ui[lang];
+
+const solutions = [
+  { href: homeAnchor(lang, page, 'pis'), label: t.footPis },
+  { href: homeAnchor(lang, page, 'infra'), label: t.footInfra },
+  { href: homeAnchor(lang, page, 'cyber'), label: t.footCyber },
+  { href: homeAnchor(lang, page, 'cert'), label: t.footCert },
+];
+---
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <Img class="logo-img" src="logo-alcasysds.png" alt="ALCASYS DS" widths={[260, 500]} sizes="260px" />
+        <p>{t.footTagline}</p>
+      </div>
+
+      <div class="foot-col">
+        <div class="ft-title">{t.footSolutions}</div>
+        <ul>
+          {solutions.map((item) => <li><a href={item.href}>{item.label}</a></li>)}
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <div class="ft-title">{t.footAbout}</div>
+        <ul>
+          <li><a href={homeAnchor(lang, page, 'referencie')}>{t.footReferences}</a></li>
+          <li><a href={pageUrl(lang, 'about')}>{t.footCompany}</a></li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <div class="ft-title">{t.footContact}</div>
+        <ul>
+          <li><a href={`mailto:${contact.email}`}>{contact.email}</a></li>
+          <li><a href={`tel:${contact.phoneHref}`}>{contact.phone}</a></li>
+          <li>{contact.cityShort}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot-bottom">
+      <span>{t.footCopyright}</span>
+      <span><a href={pageUrl(lang, 'home')}>ALCASYDS.EU</a></span>
+    </div>
+  </div>
+</footer>

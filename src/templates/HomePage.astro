@@ -1,0 +1,205 @@
+---
+import Base from '../layouts/Base.astro';
+import Img from '../components/Img.astro';
+import DotAccent from '../components/DotAccent.astro';
+import FinalCta from '../components/FinalCta.astro';
+import { home } from '../content/home';
+import type { Lang } from '../i18n/ui';
+import { pageUrl, asset } from '../lib/links';
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const c = home[lang];
+const pis = pageUrl(lang, 'pis');
+
+// Language-independent assets.
+const clients = [
+  { src: 'client-zssk.png', alt: 'ZSSK', cls: 'chip-img' },
+  { src: 'client-zsr.jpg', alt: 'ŽSR', cls: 'chip-img chip-img-small' },
+  { src: 'client-zos.jpg', alt: 'ŽOS Zvolen', cls: 'chip-img' },
+  { src: 'client-slovnaft.jpg', alt: 'Slovnaft', cls: 'chip-img' },
+];
+
+const certsRailway = [
+  { src: 'cert-en50155.png', alt: 'EN 50155' },
+  { src: 'cert-en45545-2.png', alt: 'EN 45545-2' },
+];
+
+const certsIso = [
+  { src: 'cert-iso-9001.png', alt: 'ISO 9001' },
+  { src: 'cert-iso-14001.png', alt: 'ISO 14001' },
+  { src: 'cert-iso-27001.png', alt: 'ISO 27001' },
+  { src: 'cert-iso-45001.png', alt: 'ISO 45001' },
+];
+
+const partners = [
+  { href: 'https://www.fortinet.com', src: 'partner-fortinet.webp', alt: 'Fortinet', cls: 'partner-img', w: 700 },
+  { href: 'https://www.al-enterprise.com', src: 'partner-alcatel-lucent.jpg', alt: 'Alcatel-Lucent', cls: 'partner-img partner-img-lg', w: 300 },
+  { href: 'https://www.cisco.com', src: 'partner-cisco.jpg', alt: 'Cisco', cls: 'partner-img partner-img-lg', w: 450 },
+];
+---
+
+<Base lang={lang} page="home" title={c.title} description={c.description}>
+  <section class="hero">
+    <div class="wrap">
+      <div class="eyebrow">{c.heroEyebrow}</div>
+      <h1>{c.heroHeading}<br /><span class="h1-sub">{c.heroHeadingSub}</span></h1>
+      <p class="lead">{c.heroLead}</p>
+      <div class="hero-actions">
+        <a class="btn-primary" href="#kontakt">{c.heroCtaPrimary}</a>
+        <a class="btn-ghost" href="#pis">{c.heroCtaGhost}</a>
+      </div>
+
+      <div class="hero-visual">
+        <Img
+          src="hero-train.jpg"
+          alt={c.heroImageAlt}
+          widths={[640, 960, 1280, 1600, 2200]}
+          sizes="(max-width: 1184px) 100vw, 1120px"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <DotAccent />
+      </div>
+
+      <div class="clients" id="referencie">
+        <div class="label">{c.clientsLabel}</div>
+        <p class="clients-desc">{c.clientsDesc}</p>
+        <div class="client-row">
+          {clients.map((x) => <Img class={x.cls} src={x.src} alt={x.alt} widths={[220]} sizes="110px" />)}
+          <span class="chip-frame">
+            <Img src="client-slovenske-elektrarne.jpg" alt="Slovenské elektrárne" widths={[220]} sizes="110px" />
+          </span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <div class="line-section">
+      <section class="station" id="pis">
+        <div class="rail"><div class="signal"></div></div>
+        <div class="station-body">
+          <span class="station-num">{c.pisNum}</span>
+          <h2><a href={pis}>{c.pisHeading}</a></h2>
+          <p class="desc">{c.pisDesc}</p>
+          <div class="feature-grid">
+            {
+              c.pisFeatures.map((f) => (
+                <a class="feature" href={`${pis}#${f.hash}`}>
+                  <div class="ft">{f.title}</div>
+                  <div class="fd">{f.desc}</div>
+                </a>
+              ))
+            }
+          </div>
+          <a class="back-link is-accent" href={pis} style="margin-top:20px;">{c.pisMore}</a>
+          <div class="station-photos">
+            <Img src="pis-headline.jpg" alt={c.pisPhoto1Alt} widths={[520, 1000]} sizes="(max-width: 600px) 100vw, 520px" />
+            <Img src="pis-ovladanie.jpg" alt={c.pisPhoto2Alt} widths={[380, 760]} sizes="(max-width: 600px) 100vw, 380px" />
+          </div>
+        </div>
+      </section>
+
+      <section class="station" id="infra">
+        <div class="rail"><div class="signal green"></div></div>
+        <div class="station-body">
+          <span class="station-num">{c.infraNum}</span>
+          <h2>{c.infraHeading}</h2>
+          <p class="desc">{c.infraDesc}</p>
+
+          <div class="infra-sub">
+            <span class="sub-label">{c.xmcLabel}</span>
+            <p class="desc">{c.xmcDesc}</p>
+            <div class="feature-grid">
+              {
+                c.xmcFeatures.map((f) => (
+                  <div class="feature">
+                    <div class="ft">{f.title}</div>
+                    <div class="fd">{f.desc}</div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="infra-sub infra-sub-divider">
+            <span class="sub-label">{c.lanLabel}</span>
+            <p class="desc">{c.lanDesc}</p>
+            <div class="diagram-card">
+              <Img src="diagram-lan-wan.png" alt={c.lanDiagramAlt} widths={[472, 813]} sizes="(max-width: 560px) 100vw, 472px" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="station" id="cyber">
+        <div class="rail"><div class="signal"></div></div>
+        <div class="station-body">
+          <span class="station-num">{c.cyberNum}</span>
+          <h2>{c.cyberHeading}</h2>
+          <p class="desc">{c.cyberDesc}</p>
+          <div class="feature-grid">
+            {
+              c.cyberFeatures.map((f) => (
+                <div class="feature">
+                  <div class="ft">{f.title}</div>
+                  <div class="fd">{f.desc}</div>
+                </div>
+              ))
+            }
+          </div>
+          <div class="diagram-card">
+            <Img src="diagram-network-security.jpg" alt={c.cyberDiagramAlt} widths={[472, 944, 1500]} sizes="(max-width: 560px) 100vw, 472px" />
+          </div>
+        </div>
+      </section>
+
+      <section class="station" id="cert">
+        <div class="rail"><div class="signal green"></div></div>
+        <div class="station-body">
+          <span class="station-num">{c.certNum}</span>
+          <h2>{c.certHeading}</h2>
+          <p class="desc">{c.certDesc}</p>
+          <div class="cert-row" style="margin-bottom:28px;">
+            {certsRailway.map((x) => <Img class="cert-badge cert-badge-en" src={x.src} alt={x.alt} widths={[144, 300]} sizes="72px" />)}
+          </div>
+          <p class="desc">{c.certIsoDesc}</p>
+          <div class="cert-row">
+            {certsIso.map((x) => <Img class="cert-badge cert-badge-iso" src={x.src} alt={x.alt} widths={[134, 200]} sizes="67px" />)}
+          </div>
+        </div>
+      </section>
+
+      <section class="station" id="partneri">
+        <div class="rail"><div class="signal"></div></div>
+        <div class="station-body">
+          <span class="station-num">{c.partnersNum}</span>
+          <h2>{c.partnersHeading}</h2>
+          <p class="desc">{c.partnersDesc}</p>
+          <div class="partner-row">
+            {
+              partners.map((p) => (
+                <a href={p.href} target="_blank" rel="noopener">
+                  <Img class={p.cls} src={p.src} alt={p.alt} widths={[260, p.w]} sizes="130px" />
+                </a>
+              ))
+            }
+            {/* SVG: shipped as-is, nothing for the image pipeline to improve. */}
+            <a href="https://www.hitachienergy.com" target="_blank" rel="noopener">
+              <img class="partner-img" src={asset('images/partner-hitachi-energy.svg')} alt="Hitachi Energy" width="130" height="52" />
+            </a>
+            <a href="https://www.extremenetworks.com" target="_blank" rel="noopener">
+              <Img class="partner-img" src="partner-extreme-networks.jpg" alt="Extreme Networks" widths={[260, 500]} sizes="130px" />
+            </a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <FinalCta lang={lang} full />
+</Base>

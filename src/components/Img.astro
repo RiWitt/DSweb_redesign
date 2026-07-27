@@ -1,0 +1,42 @@
+---
+/**
+ * Thin wrapper over `astro:assets` so pages can keep referring to images by
+ * bare filename (`src="hero-train.jpg"`) instead of importing each one.
+ *
+ * Every image under `src/assets/images` is converted to WebP at build time and,
+ * when `widths` is supplied, emitted as a full `srcset`. The originals are
+ * never shipped.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const modules = import.meta.glob<{ default: ImageMetadata }>(
+  '/src/assets/images/*.{jpg,jpeg,png,webp}',
+  { eager: true },
+);
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  widths?: number[];
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  decoding?: 'async' | 'sync' | 'auto';
+  quality?: number | 'low' | 'mid' | 'high' | 'max';
+}
+
+const { src, ...rest } = Astro.props;
+
+const mod = modules[`/src/assets/images/${src}`];
+if (!mod) {
+  throw new Error(
+    `Img: no such image "src/assets/images/${src}". Available: ${Object.keys(modules)
+      .map((k) => k.split('/').pop())
+      .join(', ')}`,
+  );
+}
+---
+
+<Image src={mod.default} {...rest} />

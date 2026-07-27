@@ -1,0 +1,8 @@
+---
+// Decorative 4x4 dot grid overlaid on the hero image.
+const rows = [4, 16, 28, 40];
+---
+
+<svg class="dot-accent" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  {rows.map((y) => rows.map((x) => <circle cx={x} cy={y} r="2.4" />))}
+</svg>

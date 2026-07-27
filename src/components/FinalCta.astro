@@ -1,0 +1,63 @@
+---
+import Img from './Img.astro';
+import { ui, contact, type Lang } from '../i18n/ui';
+
+interface Props {
+  lang: Lang;
+  /** Homepage shows the team photo and the contact/billing card; sub-pages don't. */
+  full?: boolean;
+  body?: string;
+}
+
+const { lang, full = false, body } = Astro.props;
+const t = ui[lang];
+const text = body ?? (full ? t.ctaBodyHome : t.ctaBodyAbout);
+---
+
+<section class="final-cta" id="kontakt">
+  <div class="wrap">
+    <div class="eyebrow">{t.ctaEyebrow}</div>
+    <h2>{t.ctaHeading}</h2>
+    <p>{text}</p>
+    <a class="btn-primary" href={`mailto:${contact.email}`}>{t.ctaButton}</a>
+
+    {
+      full && (
+        <>
+          <Img
+            class="cta-person"
+            src="team-kolegyna.jpg"
+            alt={t.ctaPersonAlt}
+            widths={[154, 308]}
+            sizes="77px"
+          />
+          <div class="contact-card">
+            <div class="contact-col">
+              <div class="ft-title">{t.contactTitle}</div>
+              <p>
+                {contact.company}<br />
+                {contact.street}<br />
+                {contact.city}
+                {lang === 'en' && <><br />Slovakia</>}
+              </p>
+              <p>
+                <a href={`mailto:${contact.email}`}>{contact.email}</a><br />
+                <a href={`tel:${contact.phoneHref}`}>{contact.phone}</a>
+              </p>
+            </div>
+            <div class="contact-col">
+              <div class="ft-title">{t.billingTitle}</div>
+              <p>
+                {lang === 'en' ? 'Company No. (IČO)' : 'IČO'}: {contact.ico}<br />
+                {lang === 'en' ? 'Tax No. (DIČ)' : 'DIČ'}: {contact.dic}<br />
+                {lang === 'en' ? 'VAT No. (IČ DPH)' : 'IČ DPH'}: {contact.icDph}<br />
+                IBAN: {contact.iban}<br />
+                SWIFT/BIC: {contact.swift}
+              </p>
+            </div>
+          </div>
+        </>
+      )
+    }
+  </div>
+</section>

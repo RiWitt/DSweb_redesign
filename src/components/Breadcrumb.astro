@@ -1,0 +1,28 @@
+---
+import { ui, type Lang, type PageKey } from '../i18n/ui';
+import { pageUrl } from '../lib/links';
+
+interface Props {
+  lang: Lang;
+  page: PageKey;
+  /** Trail after "Home"; the last entry is rendered as plain text. */
+  trail: Array<{ label: string; href?: string }>;
+}
+
+const { lang, trail } = Astro.props;
+const t = ui[lang];
+---
+
+<div class="wrap">
+  <nav class="breadcrumb" aria-label={t.breadcrumbHome}>
+    <a href={pageUrl(lang, 'home')}>{t.breadcrumbHome}</a>
+    {
+      trail.map((item) => (
+        <>
+          <span>/</span>
+          {item.href ? <a href={item.href}>{item.label}</a> : item.label}
+        </>
+      ))
+    }
+  </nav>
+</div>
