@@ -46,8 +46,9 @@
     letter-spacing:0.06em;
   }
   .ticker .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:8px;padding-bottom:8px;flex-wrap:wrap;gap:8px;}
-  .ticker .status{display:flex;align-items:center;gap:8px;color:var(--green);text-transform:uppercase;}
-  .dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;}
+  .ticker .status{display:flex;align-items:center;gap:8px;color:var(--green);text-transform:uppercase;font-weight:600;letter-spacing:0.05em;}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse-dot 2s infinite;}
+  @keyframes pulse-dot{0%{box-shadow:0 0 0 0 rgba(62,138,91,0.55);}70%{box-shadow:0 0 0 5px rgba(62,138,91,0);}100%{box-shadow:0 0 0 0 rgba(62,138,91,0);}}
   .dot.red{background:var(--red);}
 
   header{
@@ -375,7 +376,7 @@
       <div class="detail-block" id="komunikacia">
         <span class="dt-num">Komunikácia</span>
         <h3>Hlasová a núdzová komunikácia</h3>
-        <p>Ozvučenie prepája vlakový personál s cestujúcimi pre pravidelné aj mimoriadne hlásenia a zahŕňa aj núdzové komunikačné prvky pre rýchle riešenie mimoriadnych situácií.</p>
+        <p>Akustický informačný systém zabezpečuje pravidelné alebo mimoriadne hlásenia a interkomy núdzovej komunikácie cestujúcich s rušňovodičom.</p>
       </div>
 
       <div class="detail-block" id="hmi">

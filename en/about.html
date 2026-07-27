@@ -46,8 +46,9 @@
     letter-spacing:0.06em;
   }
   .ticker .wrap{display:flex;justify-content:space-between;align-items:center;padding-top:8px;padding-bottom:8px;flex-wrap:wrap;gap:8px;}
-  .ticker .status{display:flex;align-items:center;gap:8px;color:var(--green);text-transform:uppercase;}
-  .dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;}
+  .ticker .status{display:flex;align-items:center;gap:8px;color:var(--green);text-transform:uppercase;font-weight:600;letter-spacing:0.05em;}
+  .dot{width:6px;height:6px;border-radius:50%;background:var(--green);display:inline-block;animation:pulse-dot 2s infinite;}
+  @keyframes pulse-dot{0%{box-shadow:0 0 0 0 rgba(62,138,91,0.55);}70%{box-shadow:0 0 0 5px rgba(62,138,91,0);}100%{box-shadow:0 0 0 0 rgba(62,138,91,0);}}
   .dot.red{background:var(--red);}
 
   header{
