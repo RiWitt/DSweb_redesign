@@ -62,6 +62,16 @@ const canonical = new URL(pageUrl(lang, page), Astro.site);
     />
     <Font cssVariable="--font-body" />
     <Font cssVariable="--font-mono" />
+  <script is:inline>
+    /* Turn smooth scrolling on only after the browser has finished its own
+       jump to the URL fragment. With `scroll-behavior:smooth` set in CSS from
+       the start, arriving from another page on e.g. `index.html#cyber`
+       animated the whole way down from the top; now that arrival is instant
+       and in-page anchor clicks still glide. */
+    addEventListener('load', () => {
+      requestAnimationFrame(() => document.documentElement.classList.add('smooth-scroll'));
+    });
+  </script>
   </head>
 
   <body>

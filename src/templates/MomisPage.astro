@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
 import Img from '../components/Img.astro';
+import FinalCta from '../components/FinalCta.astro';
 import { momis } from '../content/pages';
 import type { Lang } from '../i18n/ui';
 import { homeAnchor } from '../lib/links';
@@ -16,92 +17,154 @@ const backHref = homeAnchor(lang, 'pis', 'pis');
 
 const wifiShots = ['momis-wifi-0.jpg', 'momis-wifi-1.jpg', 'momis-wifi-2.jpg', 'momis-wifi-3.jpg'];
 const cameraShots = ['momis-kamery-1.jpg', 'momis-kamery-2.jpg', 'momis-kamery-3.jpg'];
+
 ---
 
 <Base lang={lang} page="pis" title={c.title} description={c.description}>
-  <Breadcrumb
-    lang={lang}
-    page="pis"
-    trail={[{ label: c.breadcrumbSection, href: backHref }, { label: 'MOMIS' }]}
-  />
-
   <section class="sub-hero">
     <div class="wrap">
+      <Breadcrumb
+        lang={lang}
+        page="pis"
+        trail={[{ label: c.breadcrumbSection, href: backHref }, { label: 'MOMIS' }]}
+      />
       <div class="eyebrow">{c.eyebrow}</div>
       <h1>{c.heading}</h1>
       <p class="lead">{c.lead}</p>
     </div>
   </section>
 
-  <section class="sub-section">
+  <section class="sub-section momis-intro">
     <div class="wrap">
-      <span class="sec-label">{c.sectionLabel}</span>
-      <h2>{c.sectionHeading}</h2>
-      <p class="desc">{c.sectionDesc}</p>
+      <div class="about-intro">
+        <div>
+          <span class="sec-label">{c.sectionLabel}</span>
+          <h2>{c.sectionHeading}</h2>
+        </div>
+        <p class="desc">{c.sectionDesc}</p>
+      </div>
+    </div>
+  </section>
 
-      <div class="detail-block" id="wifi">
+  {/* --- Chapter 1: what the passenger sees ------------------------- */}
+  <section class="mgroup mgroup--tint">
+    <div class="wrap">
+      <h2>{c.groupPassenger}</h2>
+
+      <div class="mrow" id="wifi">
         <span class="dt-num">{c.wifiNum}</span>
         <h3>{c.wifiHeading}</h3>
         <p>{c.wifiDesc}</p>
-        <div class="dt-img-quad">
+        <div class="mrow-media mrow-media--phones">
           {
             wifiShots.map((src, i) => (
-              <Img src={src} alt={c.wifiAlts[i]!} widths={[160, 320, 420]} sizes="(max-width: 600px) 45vw, 160px" />
+              <Img
+                src={src}
+                alt={c.wifiAlts[i]!}
+                widths={[140, 280, 420]}
+                sizes="(max-width: 600px) 45vw, 140px"
+              />
             ))
           }
         </div>
       </div>
 
-      <div class="detail-block" id="displeje">
+      <div class="mrow" id="displeje">
         <span class="dt-num">{c.displayNum}</span>
         <h3>{c.displayHeading}</h3>
         <p>{c.displayDesc}</p>
-        <div class="dt-img-pair">
-          <Img src="momis-lcd.jpg" alt={c.displayAlts[0]} widths={[314, 628, 700]} sizes="(max-width: 600px) 100vw, 314px" />
-          <Img src="momis-led.jpg" alt={c.displayAlts[1]} widths={[314, 628, 900]} sizes="(max-width: 600px) 100vw, 314px" />
+        <div class="mrow-media mrow-media--2">
+          <Img
+            src="momis-lcd.jpg"
+            alt={c.displayAlts[0]}
+            widths={[340, 680]}
+            sizes="(max-width: 660px) 100vw, 340px"
+          />
+          <Img
+            src="momis-led.jpg"
+            alt={c.displayAlts[1]}
+            widths={[340, 680]}
+            sizes="(max-width: 660px) 100vw, 340px"
+          />
         </div>
 
-        <h3 style="margin-top:24px;">{c.onlineHeading}</h3>
+        <h3>{c.onlineHeading}</h3>
         <p>{c.onlineDesc}</p>
-        <div class="dt-img-pair-online">
-          <Img class="oi-fill" src="momis-wifi-portal.jpg" alt={c.onlineAlts[0]} widths={[320, 640, 700]} sizes="(max-width: 600px) 100vw, 320px" />
-          <Img class="oi-natural" src="momis-online-info.jpg" alt={c.onlineAlts[1]} widths={[340, 680, 1256]} sizes="(max-width: 600px) 100vw, 340px" />
+        <div class="mrow-media mrow-media--2">
+          <Img
+            src="momis-wifi-portal.jpg"
+            alt={c.onlineAlts[0]}
+            widths={[340, 680]}
+            sizes="(max-width: 660px) 100vw, 340px"
+          />
+          <Img
+            src="momis-online-info.jpg"
+            alt={c.onlineAlts[1]}
+            widths={[340, 680]}
+            sizes="(max-width: 660px) 100vw, 340px"
+          />
         </div>
       </div>
+    </div>
+  </section>
 
-      <div class="detail-block" id="pocitanie">
+  {/* --- Chapter 2: what keeps the service safe and measured -------- */}
+  <section class="mgroup">
+    <div class="wrap">
+      <h2>{c.groupSafety}</h2>
+
+      <div class="mrow" id="pocitanie">
         <span class="dt-num">{c.countNum}</span>
         <h3>{c.countHeading}</h3>
         <p>{c.countDesc}</p>
       </div>
 
-      <div class="detail-block" id="kamery">
+      <div class="mrow" id="kamery">
         <span class="dt-num">{c.cameraNum}</span>
         <h3>{c.cameraHeading}</h3>
         <p>{c.cameraDesc}</p>
-        <div class="dt-img-trio-photo">
+        <div class="mrow-media mrow-media--3">
           {
             cameraShots.map((src, i) => (
-              <Img src={src} alt={c.cameraAlts[i]!} widths={[206, 412, 500]} sizes="(max-width: 600px) 100vw, 206px" />
+              <Img
+                src={src}
+                alt={c.cameraAlts[i]!}
+                widths={[250, 500]}
+                sizes="(max-width: 600px) 100vw, 250px"
+              />
             ))
           }
         </div>
       </div>
 
-      <div class="detail-block" id="komunikacia">
+      <div class="mrow" id="komunikacia">
         <span class="dt-num">{c.voiceNum}</span>
         <h3>{c.voiceHeading}</h3>
         <p>{c.voiceDesc}</p>
       </div>
+    </div>
+  </section>
 
-      <div class="detail-block" id="hmi">
+  {/* --- Chapter 3: where it all comes together --------------------- */}
+  <section class="mgroup mgroup--tint">
+    <div class="wrap">
+      <h2>{c.groupControl}</h2>
+
+      <div class="mrow" id="hmi">
         <span class="dt-num">{c.hmiNum}</span>
         <h3>{c.hmiHeading}</h3>
         <p>{c.hmiDesc}</p>
-        <Img class="dt-img" src="momis-kabina.jpg" alt={c.hmiAlt} widths={[640, 1243]} sizes="(max-width: 680px) 100vw, 640px" />
+        <div class="mrow-media mrow-media--1">
+          <Img
+            src="momis-kabina.jpg"
+            alt={c.hmiAlt}
+            widths={[680, 1243]}
+            sizes="(max-width: 740px) 100vw, 680px"
+          />
+        </div>
       </div>
-
-      <a class="back-link" href={backHref}>{c.backLink}</a>
     </div>
   </section>
+
+  <FinalCta lang={lang} />
 </Base>

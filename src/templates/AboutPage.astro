@@ -19,10 +19,9 @@ const hrefFor = (target: 'pis' | 'infra' | 'cyber') =>
 ---
 
 <Base lang={lang} page="about" title={c.title} description={c.description}>
-  <Breadcrumb lang={lang} page="about" trail={[{ label: c.breadcrumb }]} />
-
   <section class="sub-hero">
     <div class="wrap">
+      <Breadcrumb lang={lang} page="about" trail={[{ label: c.breadcrumb }]} />
       <div class="eyebrow">{c.eyebrow}</div>
       <h1>{c.heading}</h1>
       <p class="lead">{c.lead}</p>
@@ -32,8 +31,10 @@ const hrefFor = (target: 'pis' | 'infra' | 'cyber') =>
   <section class="sub-section">
     <div class="wrap">
       <span class="sec-label">{c.sectionLabel}</span>
-      <h2>{c.sectionHeading}</h2>
-      <p class="desc">{c.sectionDesc}</p>
+      <div class="about-intro">
+        <h2>{c.sectionHeading}</h2>
+        <p class="desc">{c.sectionDesc}</p>
+      </div>
 
       <div class="value-grid">
         {
@@ -46,8 +47,6 @@ const hrefFor = (target: 'pis' | 'infra' | 'cyber') =>
           ))
         }
       </div>
-
-      <a class="back-link" href={pageUrl(lang, 'home')} style="margin-top:28px;">{c.backLink}</a>
     </div>
   </section>
 

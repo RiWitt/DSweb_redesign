@@ -110,6 +110,11 @@ export interface MomisContent {
   sectionHeading: string;
   sectionDesc: string;
 
+  /** The six subsystems are grouped under these three headings. */
+  groupPassenger: string;
+  groupSafety: string;
+  groupControl: string;
+
   wifiNum: string;
   wifiHeading: string;
   wifiDesc: string;
@@ -157,6 +162,10 @@ export const momis: Record<Lang, MomisContent> = {
     sectionHeading: 'Mnoho oblastí, jedna platforma',
     sectionDesc:
       'Každá funkčná oblasť MOMIS beží na spoločnej platforme a zdieľa dáta naprieč vozidlom — cez pracovisko rušňovodiča k cestujúcim.',
+
+    groupPassenger: 'Informácie pre cestujúcich',
+    groupSafety: 'Bezpečnosť a prevádzka',
+    groupControl: 'Riadenie a diagnostika',
 
     wifiNum: 'Pripojenie',
     wifiHeading: 'WiFi pre cestujúcich',
@@ -226,6 +235,10 @@ export const momis: Record<Lang, MomisContent> = {
     sectionHeading: 'Many areas, one platform',
     sectionDesc:
       "Every functional area of MOMIS runs on a common platform and shares data across the vehicle — from the driver's cab to the passengers.",
+
+    groupPassenger: 'Passenger information',
+    groupSafety: 'Safety and operations',
+    groupControl: 'Control and diagnostics',
 
     wifiNum: 'Connectivity',
     wifiHeading: 'WiFi for passengers',

@@ -1,6 +1,6 @@
 ---
 import Img from './Img.astro';
-import { ui, type Lang, type PageKey } from '../i18n/ui';
+import { ui, contact, type Lang, type PageKey } from '../i18n/ui';
 import { pageUrl, homeAnchor, asset } from '../lib/links';
 
 interface Props {
@@ -17,34 +17,36 @@ const navItems = [
   { href: homeAnchor(lang, page, 'cyber'), label: t.navCyber, primary: false },
 ];
 
-// The language switcher points at the *same* page in the other language.
 const ctaHref = homeAnchor(lang, page, 'kontakt');
+
+const langs = [
+  { code: 'sk' as const, label: 'Slovenčina', short: 'SK', flag: 'flag-sk.gif' },
+  { code: 'en' as const, label: 'English', short: 'EN', flag: 'flag-en.gif' },
+];
 ---
 
 <header>
   <div class="wrap nav-inner">
     <a href={pageUrl(lang, 'home')}>
-      <Img
-        class="logo-img"
-        src="logo-alcasysds.png"
-        alt="ALCASYS DS"
-        widths={[260, 500]}
-        sizes="260px"
-        loading="eager"
-      />
+      <Img class="logo-img" src="logo-alcasysds.png" alt="ALCASYS DS" widths={[260, 500]} sizes="260px" loading="eager" />
     </a>
 
-    <button
-      class="nav-toggle"
-      type="button"
-      aria-expanded="false"
-      aria-controls="site-nav"
-      aria-label={t.menuLabel}
-    >
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label={t.menuLabel}>
       <span class="nav-toggle-bars"></span>
     </button>
 
-    <nav id="site-nav">
+    <nav id="site-nav" aria-label={t.menuLabel}>
+      {/* Drawer-only chrome; hidden at desktop width. */}
+      <div class="nav-drawer-head">
+        <span class="drawer-title">{t.menuLabel}</span>
+        <button class="nav-close" type="button" aria-label={t.closeMenu}>
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+            <line x1="4" y1="4" x2="16" y2="16" stroke-linecap="round" />
+            <line x1="16" y1="4" x2="4" y2="16" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
       <ul>
         {
           navItems.map((item) => (
@@ -56,40 +58,64 @@ const ctaHref = homeAnchor(lang, page, 'kontakt');
           ))
         }
       </ul>
+
       <div class="nav-cta-mobile">
         <a class="cta" href={ctaHref}>{t.navCta}</a>
+      </div>
+
+      {/* Language picker lives inside the drawer on mobile. */}
+      <div class="nav-drawer-foot">
+        <div class="drawer-title">{t.languageLabel}</div>
+        <div class="lang-switch">
+          {
+            langs.map((l) => (
+              <a
+                class={lang === l.code ? 'active' : undefined}
+                href={pageUrl(l.code, page)}
+                hreflang={l.code}
+                aria-label={l.label}
+              >
+                <img src={asset(`images/${l.flag}`)} alt="" width="24" height="16" />
+                {l.short}
+              </a>
+            ))
+          }
+        </div>
+        <div class="drawer-contact">
+          <a href={`mailto:${contact.email}`}>{contact.email}</a><br />
+          <a href={`tel:${contact.phoneHref}`}>{contact.phone}</a>
+        </div>
       </div>
     </nav>
 
     <a class="cta cta-desktop" href={ctaHref}>{t.navCta}</a>
 
     <div class="lang-switch">
-      <a
-        class={lang === 'sk' ? 'active' : undefined}
-        href={pageUrl('sk', page)}
-        hreflang="sk"
-        aria-label="Slovenčina"
-      >
-        <img src={asset('images/flag-sk.gif')} alt="SK" width="24" height="16" />
-      </a>
-      <a
-        class={lang === 'en' ? 'active' : undefined}
-        href={pageUrl('en', page)}
-        hreflang="en"
-        aria-label="English"
-      >
-        <img src={asset('images/flag-en.gif')} alt="EN" width="24" height="16" />
-      </a>
+      {
+        langs.map((l) => (
+          <a
+            class={lang === l.code ? 'active' : undefined}
+            href={pageUrl(l.code, page)}
+            hreflang={l.code}
+            aria-label={l.label}
+          >
+            <img src={asset(`images/${l.flag}`)} alt={l.short} width="24" height="16" />
+          </a>
+        ))
+      }
     </div>
   </div>
 </header>
 
+<div class="nav-scrim" hidden></div>
+
 {/* Without JS the drawer can never be opened, so show the links inline instead. */}
 <noscript>
   <style>
-    @media (max-width: 820px) {
+    @media (max-width: 900px) {
       .nav-toggle { display: none; }
-      #site-nav { position: static; display: block; box-shadow: none; }
+      #site-nav { position: static; transform: none; box-shadow: none; width: auto; }
+      .nav-drawer-head { display: none; }
     }
   </style>
 </noscript>
@@ -97,17 +123,31 @@ const ctaHref = homeAnchor(lang, page, 'kontakt');
 <script>
   const toggle = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const nav = document.getElementById('site-nav');
+  const scrim = document.querySelector<HTMLElement>('.nav-scrim');
+  const closeBtn = document.querySelector<HTMLButtonElement>('.nav-close');
 
-  if (toggle && nav) {
+  if (toggle && nav && scrim) {
     const isOpen = () => toggle.getAttribute('aria-expanded') === 'true';
+
+    const focusables = () =>
+      Array.from(
+        nav.querySelectorAll<HTMLElement>('a[href], button:not([disabled])'),
+      ).filter((el) => el.offsetParent !== null);
 
     const setOpen = (open: boolean) => {
       toggle.setAttribute('aria-expanded', String(open));
       nav.toggleAttribute('data-open', open);
+      scrim.hidden = !open;
       document.body.classList.toggle('nav-open', open);
+      if (open) focusables()[0]?.focus();
     };
 
     toggle.addEventListener('click', () => setOpen(!isOpen()));
+    closeBtn?.addEventListener('click', () => {
+      setOpen(false);
+      toggle.focus();
+    });
+    scrim.addEventListener('click', () => setOpen(false));
 
     // Anchor links keep you on the page, so close the drawer explicitly.
     nav.addEventListener('click', (event) => {
@@ -115,19 +155,32 @@ const ctaHref = homeAnchor(lang, page, 'kontakt');
     });
 
     document.addEventListener('keydown', (event) => {
-      if (event.key === 'Escape' && isOpen()) {
+      if (!isOpen()) return;
+
+      if (event.key === 'Escape') {
         setOpen(false);
         toggle.focus();
+        return;
+      }
+
+      // Keep focus inside the drawer while it covers the page.
+      if (event.key === 'Tab') {
+        const items = focusables();
+        if (!items.length) return;
+        const first = items[0]!;
+        const last = items[items.length - 1]!;
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     });
 
-    document.addEventListener('click', (event) => {
-      if (isOpen() && !(event.target as HTMLElement).closest('header')) setOpen(false);
-    });
-
-    // Resizing up to desktop leaves `body.nav-open` stuck otherwise.
-    const desktop = window.matchMedia('(min-width: 821px)');
-    desktop.addEventListener('change', (event) => {
+    // Resizing up to desktop would otherwise leave `body.nav-open` stuck.
+    window.matchMedia('(min-width: 901px)').addEventListener('change', (event) => {
       if (event.matches) setOpen(false);
     });
   }

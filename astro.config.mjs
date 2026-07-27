@@ -25,27 +25,36 @@ export default defineConfig({
   // Previously these came from fonts.googleapis.com via a render-blocking
   // stylesheet, which also sent every visitor's IP to Google.
   fonts: [
+    // Display: Archivo, set in sentence case. Replaced Bebas Neue, whose
+    // all-caps condensed treatment was the trait shared with the reference
+    // site that scored worst in review; both best-scoring references use
+    // sentence-case, non-condensed display type.
     {
       provider: fontProviders.google(),
-      name: 'Bebas Neue',
+      name: 'Archivo',
       cssVariable: '--font-display',
-      weights: [400],
-      subsets: ['latin', 'latin-ext'],
-      fallbacks: ['Impact', 'sans-serif'],
-    },
-    {
-      provider: fontProviders.google(),
-      name: 'IBM Plex Sans',
-      cssVariable: '--font-body',
-      weights: [400, 500, 600],
+      weights: [600, 700],
       subsets: ['latin', 'latin-ext'],
       fallbacks: ['system-ui', 'sans-serif'],
     },
     {
       provider: fontProviders.google(),
-      name: 'JetBrains Mono',
+      name: 'IBM Plex Sans',
+      cssVariable: '--font-body',
+      weights: [400, 500, 600, 700],
+      subsets: ['latin', 'latin-ext'],
+      fallbacks: ['system-ui', 'sans-serif'],
+    },
+    // Monospace is now used for exactly one thing: the company registry block
+    // (IČO / DIČ / IBAN), where fixed-width digits actually aid reading.
+    // It replaced JetBrains Mono, which previously set every button, label and
+    // nav item — mono UI chrome is the strongest "generated template" tell,
+    // and IBM Plex Mono at least belongs to the same superfamily as the body.
+    {
+      provider: fontProviders.google(),
+      name: 'IBM Plex Mono',
       cssVariable: '--font-mono',
-      weights: [400, 500, 600],
+      weights: [400],
       subsets: ['latin', 'latin-ext'],
       fallbacks: ['ui-monospace', 'monospace'],
     },

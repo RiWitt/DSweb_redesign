@@ -5,7 +5,7 @@ import { pageUrl } from '../lib/links';
 interface Props {
   lang: Lang;
   page: PageKey;
-  /** Trail after "Home"; the last entry is rendered as plain text. */
+  /** Trail after "Home"; the last entry renders as plain text, not a link. */
   trail: Array<{ label: string; href?: string }>;
 }
 
@@ -13,16 +13,21 @@ const { lang, trail } = Astro.props;
 const t = ui[lang];
 ---
 
-<div class="wrap">
-  <nav class="breadcrumb" aria-label={t.breadcrumbHome}>
-    <a href={pageUrl(lang, 'home')}>{t.breadcrumbHome}</a>
+{/* Sits inside the sub-hero band. It previously floated on white above it,
+    which left it looking like an orphaned line of grey text. */}
+<nav class="breadcrumb" aria-label={t.breadcrumbLabel}>
+  <ol>
+    <li><a href={pageUrl(lang, 'home')}>{t.breadcrumbHome}</a></li>
     {
-      trail.map((item) => (
-        <>
-          <span>/</span>
-          {item.href ? <a href={item.href}>{item.label}</a> : item.label}
-        </>
+      trail.map((item, i) => (
+        <li>
+          {item.href ? (
+            <a href={item.href}>{item.label}</a>
+          ) : (
+            <span aria-current={i === trail.length - 1 ? 'page' : undefined}>{item.label}</span>
+          )}
+        </li>
       ))
     }
-  </nav>
-</div>
+  </ol>
+</nav>
