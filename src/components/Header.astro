@@ -123,8 +123,6 @@ const langs = [
   </div>
 </header>
 
-<div class="nav-scrim" hidden></div>
-
 {/* Without JS the drawer can never be opened, so show the links inline instead. */}
 <noscript>
   <style>
@@ -199,6 +197,141 @@ const langs = [
     window.matchMedia('(min-width: 901px)').addEventListener('change', (event) => {
       if (event.matches) setOpen(false);
     });
+  }
+
+  /* Section highlighting. Only the homepage has nav links that are bare
+     fragments — homeAnchor() emits a full path from every other page — so this
+     needs no page check: elsewhere the selector simply matches nothing. */
+  const spied = Array.from(
+    document.querySelectorAll<HTMLAnchorElement>('#site-nav a[href^="#"]'),
+  )
+    .map((link) => ({ link, section: document.getElementById(link.hash.slice(1)) }))
+    .filter((entry): entry is { link: HTMLAnchorElement; section: HTMLElement } =>
+      entry.section !== null,
+    );
+
+  if (spied.length) {
+    const header = document.querySelector('header');
+
+    const update = () => {
+      // Match against the line the sticky header leaves exposed, not the
+      // viewport top, or a section counts as current while hidden behind it.
+      const line = (header?.getBoundingClientRect().height ?? 0) + 12;
+
+      // A section is current only while it straddles that line. Ranges that
+      // belong to no nav item — the hero, the credentials block below #cyber —
+      // then correctly highlight nothing, rather than leaving the last
+      // section lit for the rest of the page.
+      const active = spied.find(({ section }) => {
+        const { top, bottom } = section.getBoundingClientRect();
+        return top <= line && bottom > line;
+      });
+
+      for (const entry of spied) {
+        if (entry === active) entry.link.setAttribute('aria-current', 'location');
+        else entry.link.removeAttribute('aria-current');
+      }
+    };
+
+    // Scroll fires far faster than paint; coalesce to one read per frame so
+    // the loop stays off the critical path.
+    let queued = false;
+    const onScroll = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        update();
+      });
+    };
+
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+    update();
+  }
+
+  /* Contact strip: hidden while reading downwards, returned on scroll up. */
+  const headbar = document.querySelector<HTMLElement>('.headbar');
+  const ticker = headbar?.querySelector<HTMLElement>('.ticker');
+
+  if (headbar && ticker) {
+    // The strip is not a fixed height — it wraps to two rows on narrow phones
+    // — so the collapse distance is measured rather than hard-coded.
+    const publishHeight = () =>
+      document.documentElement.style.setProperty('--ticker-h', `${ticker.offsetHeight}px`);
+    publishHeight();
+    if ('ResizeObserver' in window) new ResizeObserver(publishHeight).observe(ticker);
+
+    // Upward travel required before the strip comes back, so that the flicks
+    // and rubber-banding inside a downward read do not keep summoning it.
+    const REVEAL_AFTER = 44;
+    // Close to the top the strip simply belongs on screen.
+    const ALWAYS_OPEN_TO = 64;
+
+    const compact = (on: boolean) => document.body.classList.toggle('head-compact', on);
+
+    let lastY = scrollY;
+    let travelledUp = 0;
+    let held = false;
+    let release = 0;
+
+    const read = () => {
+      const y = Math.max(0, scrollY);
+      const delta = y - lastY;
+      lastY = y;
+      if (held) return;
+
+      if (y <= ALWAYS_OPEN_TO) {
+        travelledUp = 0;
+        compact(false);
+      } else if (delta > 0) {
+        travelledUp = 0;
+        compact(true);
+      } else if (delta < 0) {
+        travelledUp -= delta;
+        if (travelledUp >= REVEAL_AFTER) compact(false);
+      }
+    };
+
+    let queued = false;
+    const onScroll = () => {
+      if (queued) return;
+      queued = true;
+      requestAnimationFrame(() => {
+        queued = false;
+        read();
+      });
+    };
+    addEventListener('scroll', onScroll, { passive: true });
+
+    /* Clicking an in-page anchor scrolls upwards, which would reveal the strip
+       and leave it sitting over the heading you just jumped to: every
+       scroll-margin-top in the stylesheet is measured against the header on its
+       own. So pin the collapsed state until the jump has settled. */
+    const holdCollapsed = () => {
+      held = true;
+      travelledUp = 0;
+      compact(true);
+      clearTimeout(release);
+      release = window.setTimeout(() => {
+        held = false;
+        lastY = scrollY;
+        travelledUp = 0;
+        read();
+      }, 700);
+    };
+
+    document.addEventListener('click', (event) => {
+      const link = (event.target as HTMLElement).closest?.('a[href*="#"]');
+      if (!(link instanceof HTMLAnchorElement) || !link.hash) return;
+      // Same-document jumps only — a cross-page link takes its own scroll
+      // position with it and never scrolls this page upwards.
+      if (link.pathname === location.pathname && link.host === location.host) holdCollapsed();
+    });
+
+    // Arriving on `…#cyber` lands mid-page with no scroll event to react to.
+    if (scrollY > ALWAYS_OPEN_TO) compact(true);
+    read();
   }
 
   /* <details> handles open/close and keyboard activation itself; these are the

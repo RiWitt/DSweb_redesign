@@ -215,7 +215,7 @@ export const momis: Record<Lang, MomisContent> = {
     voiceNum: 'Komunikácia',
     voiceHeading: 'Hlasová a núdzová komunikácia',
     voiceDesc:
-      'Ozvučenie prepája vlakový personál s cestujúcimi pre pravidelné aj mimoriadne hlásenia a zahŕňa aj núdzové komunikačné prvky pre rýchle riešenie mimoriadnych situácií.',
+      'Akustický informačný systém zabezpečuje pravidelné alebo mimoriadne hlásenia a interkomy núdzovej komunikácie cestujúcich s rušňovodičom.',
 
     hmiNum: 'Riadenie',
     hmiHeading: 'Pracovisko rušňovodiča (HMI)',
@@ -288,7 +288,7 @@ export const momis: Record<Lang, MomisContent> = {
     voiceNum: 'Communication',
     voiceHeading: 'Voice and emergency communication',
     voiceDesc:
-      'The public address system connects train staff with passengers for both routine and exceptional announcements, and also includes emergency communication features for quickly handling exceptional situations.',
+      'The public address system connects train staff with passengers for both routine and exceptional announcements. It also includes emergency intercom communication for quickly handling exceptional situations.',
 
     hmiNum: 'Control',
     hmiHeading: "Driver's cab (HMI)",

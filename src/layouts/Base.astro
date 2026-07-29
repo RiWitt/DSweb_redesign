@@ -124,8 +124,20 @@ const orgSchema = {
 
   <body>
     <a class="visually-hidden skip-link" href="#main">{t.skipToContent}</a>
-    <Ticker lang={lang} />
-    <Header lang={lang} page={page} />
+    {/* The ticker and the header stick as one group: the ticker is pulled up
+        out of sight while you read downwards and slides back in when you
+        scroll up. Stickiness therefore lives here, not on <header>.
+        Nothing in this wrapper may take a `transform` — the mobile drawer is a
+        fixed-position descendant and a transformed ancestor would become its
+        containing block, which is why the collapse is done with margin. */}
+    <div class="headbar">
+      <Ticker lang={lang} />
+      <Header lang={lang} page={page} />
+    </div>
+    {/* Deliberately outside .headbar. The wrapper is a z-index:50 stacking
+        context, so a scrim nested inside it would paint over the header
+        instead of behind it. */}
+    <div class="nav-scrim" hidden></div>
     <main id="main">
       <slot />
     </main>
