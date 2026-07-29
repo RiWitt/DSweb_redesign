@@ -87,7 +87,7 @@ export const home: Record<Lang, HomeContent> = {
       { hash: 'komunikacia', title: 'Hlasová komunikácia', desc: 'Prepojenie vlakového personálu a informovanie cestujúcich.' },
       { hash: 'hmi', title: 'Pracovisko rušňovodiča', desc: 'Jednotný prístup ku všetkým prvkom PIS a jeho diagnostike.' },
     ],
-    pisMore: 'Viac o systéme MOMIS →',
+    pisMore: 'Viac o systéme MOMIS',
     pisPhoto1Alt: 'Vlak ZSSK vybavený informačným systémom v krajine',
     pisPhoto2Alt: 'Ovládanie vlaku rušňovodičom',
 
@@ -163,7 +163,7 @@ export const home: Record<Lang, HomeContent> = {
       { hash: 'komunikacia', title: 'Voice communication', desc: 'Connecting train staff and keeping passengers informed.' },
       { hash: 'hmi', title: "Driver's cab", desc: 'Unified access to all PIS components and their diagnostics.' },
     ],
-    pisMore: 'More about the MOMIS system →',
+    pisMore: 'More about the MOMIS system',
     pisPhoto1Alt: 'ZSSK train equipped with an information system, in the countryside',
     pisPhoto2Alt: 'Driver operating the train',
 

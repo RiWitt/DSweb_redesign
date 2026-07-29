@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://riwitt.github.io/DSweb_redesign/sitemap-index.xml

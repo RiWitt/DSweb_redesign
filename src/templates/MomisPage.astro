@@ -21,16 +21,29 @@ const cameraShots = ['momis-kamery-1.jpg', 'momis-kamery-2.jpg', 'momis-kamery-3
 ---
 
 <Base lang={lang} page="pis" title={c.title} description={c.description}>
-  <section class="sub-hero">
+  <section class="sub-hero sub-hero--media">
     <div class="wrap">
       <Breadcrumb
         lang={lang}
         page="pis"
         trail={[{ label: c.breadcrumbSection, href: backHref }, { label: 'MOMIS' }]}
       />
-      <div class="eyebrow">{c.eyebrow}</div>
-      <h1>{c.heading}</h1>
-      <p class="lead">{c.lead}</p>
+      <div class="sub-hero-grid">
+        <div>
+          <div class="eyebrow">{c.eyebrow}</div>
+          <h1>{c.heading}</h1>
+          <p class="lead">{c.lead}</p>
+        </div>
+        <Img
+          src="momis-wifi-portal.jpg"
+          alt={c.onlineAlts[0]}
+          class="sub-hero-img"
+          widths={[460, 700]}
+          sizes="(max-width: 900px) 100vw, 460px"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
     </div>
   </section>
 
@@ -47,7 +60,7 @@ const cameraShots = ['momis-kamery-1.jpg', 'momis-kamery-2.jpg', 'momis-kamery-3
   </section>
 
   {/* --- Chapter 1: what the passenger sees ------------------------- */}
-  <section class="mgroup mgroup--tint">
+  <section class="mgroup">
     <div class="wrap">
       <h2>{c.groupPassenger}</h2>
 
@@ -109,7 +122,7 @@ const cameraShots = ['momis-kamery-1.jpg', 'momis-kamery-2.jpg', 'momis-kamery-3
   </section>
 
   {/* --- Chapter 2: what keeps the service safe and measured -------- */}
-  <section class="mgroup">
+  <section class="mgroup mgroup--tint">
     <div class="wrap">
       <h2>{c.groupSafety}</h2>
 
@@ -146,7 +159,7 @@ const cameraShots = ['momis-kamery-1.jpg', 'momis-kamery-2.jpg', 'momis-kamery-3
   </section>
 
   {/* --- Chapter 3: where it all comes together --------------------- */}
-  <section class="mgroup mgroup--tint">
+  <section class="mgroup">
     <div class="wrap">
       <h2>{c.groupControl}</h2>
 

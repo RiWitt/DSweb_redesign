@@ -19,6 +19,8 @@ const navItems = [
 
 const ctaHref = homeAnchor(lang, page, 'kontakt');
 
+const current = { sk: 'SK', en: 'EN' }[lang];
+
 const langs = [
   { code: 'sk' as const, label: 'Slovenčina', short: 'SK', flag: 'flag-sk.gif' },
   { code: 'en' as const, label: 'English', short: 'EN', flag: 'flag-en.gif' },
@@ -88,22 +90,36 @@ const langs = [
       </div>
     </nav>
 
-    <a class="cta cta-desktop" href={ctaHref}>{t.navCta}</a>
+    {/* <details> gives a working dropdown with no JS at all — the script below
+        only adds outside-click and Escape, which native <details> lacks. */}
+    <details class="lang-menu">
+      <summary aria-label={`${t.languageLabel}: ${current}`}>
+        <img src={asset(`images/${langs.find((l) => l.code === lang)!.flag}`)} alt="" width="24" height="16" />
+        <span>{current}</span>
+        <svg class="lang-caret" width="10" height="7" viewBox="0 0 10 7" fill="none" aria-hidden="true">
+          <path d="M1 1.5 L5 5.5 L9 1.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </summary>
+      <ul>
+        {
+          langs.map((l) => (
+            <li>
+              <a
+                href={pageUrl(l.code, page)}
+                hreflang={l.code}
+                lang={l.code}
+                aria-current={lang === l.code ? 'true' : undefined}
+              >
+                <img src={asset(`images/${l.flag}`)} alt="" width="24" height="16" />
+                <span>{l.label}</span>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </details>
 
-    <div class="lang-switch">
-      {
-        langs.map((l) => (
-          <a
-            class={lang === l.code ? 'active' : undefined}
-            href={pageUrl(l.code, page)}
-            hreflang={l.code}
-            aria-label={l.label}
-          >
-            <img src={asset(`images/${l.flag}`)} alt={l.short} width="24" height="16" />
-          </a>
-        ))
-      }
-    </div>
+    <a class="cta cta-desktop" href={ctaHref}>{t.navCta}</a>
   </div>
 </header>
 
@@ -182,6 +198,21 @@ const langs = [
     // Resizing up to desktop would otherwise leave `body.nav-open` stuck.
     window.matchMedia('(min-width: 901px)').addEventListener('change', (event) => {
       if (event.matches) setOpen(false);
+    });
+  }
+
+  /* <details> handles open/close and keyboard activation itself; these are the
+     two behaviours it does not provide. */
+  const langMenu = document.querySelector<HTMLDetailsElement>('.lang-menu');
+  if (langMenu) {
+    document.addEventListener('click', (event) => {
+      if (langMenu.open && !langMenu.contains(event.target as Node)) langMenu.open = false;
+    });
+    langMenu.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && langMenu.open) {
+        langMenu.open = false;
+        langMenu.querySelector('summary')?.focus();
+      }
     });
   }
 </script>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="ALCASYS DS">
+  <rect width="64" height="64" rx="13" fill="#BC2B2F"/>
+  <g transform="translate(32 33) scale(.78) translate(-32 -32)">
+    <path fill="#fff" fill-rule="evenodd" d="M13 50 L26.5 14 H37.5 L51 50 H41.5 L38.6 41.8 H25.4 L22.5 50 Z M28 34 H36 L32 22.5 Z"/>
+  </g>
+</svg>

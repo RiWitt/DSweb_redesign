@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import Breadcrumb from '../components/Breadcrumb.astro';
+import Img from '../components/Img.astro';
 import FinalCta from '../components/FinalCta.astro';
 import ValueIcon from '../components/ValueIcon.astro';
 import { about } from '../content/pages';
@@ -19,12 +20,25 @@ const hrefFor = (target: 'pis' | 'infra' | 'cyber') =>
 ---
 
 <Base lang={lang} page="about" title={c.title} description={c.description}>
-  <section class="sub-hero">
+  <section class="sub-hero sub-hero--media">
     <div class="wrap">
       <Breadcrumb lang={lang} page="about" trail={[{ label: c.breadcrumb }]} />
-      <div class="eyebrow">{c.eyebrow}</div>
-      <h1>{c.heading}</h1>
-      <p class="lead">{c.lead}</p>
+      <div class="sub-hero-grid">
+        <div>
+          <div class="eyebrow">{c.eyebrow}</div>
+          <h1>{c.heading}</h1>
+          <p class="lead">{c.lead}</p>
+        </div>
+        <Img
+          src="pis-nastupiste.jpg"
+          alt={c.heroImageAlt}
+          class="sub-hero-img"
+          widths={[460, 920]}
+          sizes="(max-width: 900px) 100vw, 460px"
+          loading="eager"
+          fetchpriority="high"
+        />
+      </div>
     </div>
   </section>
 

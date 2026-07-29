@@ -9,10 +9,13 @@ import sitemap from '@astrojs/sitemap';
  * If you later point a custom domain (e.g. alcasyds.eu) at the Pages site,
  * set `base: '/'` and change `site` to the domain — nothing else needs to move,
  * because every internal link goes through `src/lib/links.ts`.
+ *
+ * The Docker/Coolify build does exactly that by passing SITE and BASE_PATH,
+ * so the same source tree serves both targets.
  */
 export default defineConfig({
-  site: 'https://riwitt.github.io',
-  base: '/DSweb_redesign',
+  site: process.env.SITE ?? 'https://riwitt.github.io',
+  base: process.env.BASE_PATH ?? '/DSweb_redesign',
 
   // 'preserve' mirrors the source tree exactly: `o-nas.astro` -> `/o-nas.html`
   // and `en/index.astro` -> `/en/index.html`. ('file' would have collapsed the

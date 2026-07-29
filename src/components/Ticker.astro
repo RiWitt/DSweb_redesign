@@ -9,7 +9,9 @@ const { lang } = Astro.props;
 const t = ui[lang];
 ---
 
-<div class="ticker">
+{/* A landmark, not a bare div: it sits outside <header> (it does not stick),
+    so without one its contact details belong to no region of the page. */}
+<aside class="ticker" aria-label={t.tickerLabel}>
   <div class="wrap">
     <div class="status"><span class="dot"></span>{t.tickerStatus}</div>
     <div>
@@ -17,4 +19,4 @@ const t = ui[lang];
       <a href={`tel:${contact.phoneHref}`}>{contact.phone}</a>
     </div>
   </div>
-</div>
+</aside>

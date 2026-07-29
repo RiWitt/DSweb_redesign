@@ -22,6 +22,7 @@ export interface AboutContent {
   sectionHeading: string;
   sectionDesc: string;
   values: ValueItem[];
+  heroImageAlt: string;
   backLink: string;
 }
 
@@ -32,6 +33,7 @@ export const about: Record<Lang, AboutContent> = {
       'Alcasys DS nadväzuje na tím a know-how, ktoré viac než desať rokov budovali komunikačné a informačné riešenia pre priemysel a dopravu.',
     breadcrumb: 'O nás',
     eyebrow: 'O spoločnosti',
+    heroImageAlt: 'Nástupište železničnej stanice s vlakmi a cestujúcimi',
     heading: 'Skúsenosti, ktoré siahajú viac než desaťročie dozadu.',
     lead: 'Alcasys DS nadväzuje na tím a know-how, ktoré viac než desať rokov budovali komunikačné a informačné riešenia pre priemysel a dopravu ako súčasť spoločnosti ALCASYS. Od roku 2025 pôsobíme ako samostatná spoločnosť — Alcasys DS, s. r. o. — s vlastnou identitou, no s rovnakými ľuďmi, skúsenosťami a partnerstvami, na ktoré sa naši zákazníci spoliehali doteraz.',
     sectionLabel: 'Čím sa zaoberáme',
@@ -67,6 +69,7 @@ export const about: Record<Lang, AboutContent> = {
       'Alcasys DS builds on the team and know-how that spent more than ten years developing communication and information solutions for industry and transport.',
     breadcrumb: 'About Us',
     eyebrow: 'About the company',
+    heroImageAlt: 'A railway station platform with trains and passengers',
     heading: 'Experience that goes back more than a decade.',
     lead: 'Alcasys DS builds on the team and know-how that spent more than ten years developing communication and information solutions for industry and transport as part of ALCASYS. Since 2025 we have operated as an independent company — Alcasys DS, s. r. o. — with our own identity, but with the same people, experience, and partnerships our customers have relied on all along.',
     sectionLabel: 'What we do',

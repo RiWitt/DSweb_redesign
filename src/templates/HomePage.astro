@@ -84,7 +84,9 @@ const partners = [
         <span class="eyebrow">{c.pisNum}</span>
         <h2><a href={pis}>{c.pisHeading}</a></h2>
         <p class="desc">{c.pisDesc}</p>
-        <a class="back-link is-accent" href={pis}>{c.pisMore}</a>
+        <a class="btn-solid" href={pis}>
+          {c.pisMore}<span class="btn-arrow" aria-hidden="true">&#8594;</span>
+        </a>
       </div>
       <div class="svc-media svc-media--pair">
         <Img src="pis-headline.jpg" alt={c.pisPhoto1Alt} widths={[560, 1000]} sizes="(max-width: 900px) 100vw, 520px" />

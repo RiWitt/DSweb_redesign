@@ -139,6 +139,40 @@ nav a.nav-primary{color:var(--red);font-weight:600;}
 }
 .cta:hover{background:var(--red-dark);}
 
+/* Desktop language dropdown. Two languages would normally be an inline
+   toggle, but a menu keeps the header row quiet and leaves room for a third. */
+.lang-menu{position:relative;}
+.lang-menu > summary{
+  list-style:none;cursor:pointer;
+  display:inline-flex;align-items:center;gap:8px;
+  padding:8px 12px;border:1px solid var(--line);border-radius:var(--r-btn);
+  font-size:14.5px;font-weight:600;color:var(--ink);
+  transition:border-color .15s ease;
+}
+.lang-menu > summary::-webkit-details-marker{display:none;}
+.lang-menu > summary::marker{content:'';}
+.lang-menu > summary:hover{border-color:var(--gray-light);}
+.lang-caret{transition:transform .18s ease;color:var(--gray);}
+.lang-menu[open] > summary .lang-caret{transform:rotate(180deg);}
+.lang-menu > ul{
+  position:absolute;top:calc(100% + 8px);right:0;z-index:70;
+  min-width:186px;list-style:none;padding:6px;
+  background:#fff;border:1px solid var(--line);border-radius:var(--r-card);
+  box-shadow:var(--shadow-card);
+}
+.lang-menu li a{
+  display:flex;align-items:center;gap:10px;
+  padding:9px 10px;border-radius:var(--r-chip);
+  font-size:14.5px;color:var(--ink);
+}
+.lang-menu li a:hover{background:var(--bg-alt);}
+.lang-menu li a[aria-current='true']{font-weight:600;}
+.lang-menu li a[aria-current='true']::after{
+  content:'';margin-left:auto;width:6px;height:6px;border-radius:50%;background:var(--red);
+}
+.lang-menu img{width:24px;height:auto;display:block;border:1px solid var(--line);border-radius:3px;}
+@media (max-width:900px){ .lang-menu{display:none;} }
+
 .lang-switch{display:flex;align-items:center;gap:8px;}
 .lang-switch a{display:block;line-height:0;opacity:0.4;transition:opacity .15s ease;}
 .lang-switch a.active{opacity:1;pointer-events:none;}
@@ -440,6 +474,24 @@ a.feature:hover{transform:translateY(-2px);box-shadow:var(--shadow-card);border-
 .sub-hero h1{font-size:clamp(30px,4.4vw,48px);max-width:20ch;margin-bottom:20px;}
 .sub-hero p.lead{font-size:18px;color:var(--gray);max-width:66ch;line-height:1.62;}
 
+/* Hero with a supporting photograph (MOMIS). The About hero stays text-only,
+   so this is a variant rather than a change to .sub-hero itself. */
+.sub-hero--media .sub-hero-grid{
+  display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);
+  gap:52px;align-items:center;
+}
+.sub-hero--media h1{max-width:none;}
+.sub-hero--media p.lead{max-width:52ch;margin-bottom:0;}
+.sub-hero-img{
+  width:100%;height:330px;object-fit:cover;
+  border-radius:var(--r-img);display:block;
+}
+@media (max-width:900px){
+  .sub-hero--media .sub-hero-grid{grid-template-columns:1fr;gap:32px;}
+  .sub-hero--media p.lead{max-width:66ch;}
+  .sub-hero-img{height:240px;}
+}
+
 .sub-section{padding:60px 0;}
 .sub-section .sec-label{font-size:12.5px;color:var(--red);margin-bottom:14px;display:block;}
 .sub-section h2{font-size:clamp(26px,3vw,34px);max-width:20ch;margin-bottom:16px;}
@@ -472,7 +524,14 @@ a.feature:hover{transform:translateY(-2px);box-shadow:var(--shadow-card);border-
    chapter level, where that is exactly what they mean. Alternating two tones
    separates the three chapters without a rule or a count beside the heading.
    ------------------------------------------------------------------------ */
-.momis-intro{padding:60px 0 40px;}
+/* The intro introduces the chapters below it, so it stays white and runs
+   straight into the first (also white) chapter. Its own bottom padding is
+   zero — .mgroup's 52px top padding provides the gap. */
+.momis-intro{padding:56px 0 0;}
+.momis-intro .about-intro{margin-bottom:0;}
+/* No band edge separates the intro from the first chapter now that both are
+   white, so the gap has to do that work on its own. */
+.momis-intro + .mgroup{padding-top:70px;}
 .mgroup{padding:52px 0 60px;}
 /* Stone is the homepage's third service band and is too heavy to alternate
    with white down a whole page; bg-alt gives the same full-width edge without
@@ -522,6 +581,21 @@ a.feature:hover{transform:translateY(-2px);box-shadow:var(--shadow-card);border-
 }
 
 /* --- Back link ----------------------------------------------------------- */
+/* MOMIS is the only service on this page with a page of its own, and it is
+   the flagship product — a text link undersold it. Solid ink rather than
+   brand red so it does not compete with the contact CTA in the header. */
+.btn-solid{
+  display:inline-flex;align-items:center;gap:10px;
+  margin-top:22px;padding:13px 22px;border-radius:var(--r-btn);
+  background:var(--ink);color:#fff;
+  font-size:15px;font-weight:600;
+  transition:background .15s ease, transform .15s ease;
+}
+.btn-solid:hover{background:#111417;}
+.btn-arrow{transition:transform .18s ease;}
+.btn-solid:hover .btn-arrow{transform:translateX(4px);}
+@media (prefers-reduced-motion:reduce){ .btn-solid:hover .btn-arrow{transform:none;} }
+
 .back-link{
   display:inline-flex;align-items:center;gap:8px;
   font-size:14.5px;font-weight:600;color:var(--ink);margin-top:8px;

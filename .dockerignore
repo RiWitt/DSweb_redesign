@@ -1,0 +1,11 @@
+node_modules
+dist
+.astro
+.git
+.github
+.claude
+.agents
+*.log
+.DS_Store
+.env
+.env.production
