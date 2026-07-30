@@ -1,8 +1,10 @@
 name: Deploy to GitHub Pages
 
 on:
+  # `visual-update` is the branch the Astro site lives on; `main` is still the
+  # old hand-written HTML upload. Switch this to `main` once the two are merged.
   push:
-    branches: [main]
+    branches: [visual-update]
   # Allows running this workflow manually from the Actions tab.
   workflow_dispatch:
 
@@ -27,14 +29,25 @@ jobs:
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version-file: ".nvmrc"
           cache: npm
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
+
+      # --site / --base come from Pages rather than the defaults in
+      # astro.config.mjs, so pointing a custom domain at this repo needs no
+      # code change. The Docker/Coolify build passes SITE and BASE_PATH for
+      # the same reason.
       - name: Build
-        run: npm run build
+        run: |
+          npx --no-install astro build \
+            --site "${{ steps.pages.outputs.origin }}" \
+            --base "${{ steps.pages.outputs.base_path }}"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

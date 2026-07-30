@@ -1,5 +1,5 @@
 # --- build ---------------------------------------------------------------
-FROM node:22-alpine AS build
+FROM node:24-alpine AS build
 WORKDIR /app
 
 # Coolify (and any other host serving from a domain root) needs base '/',
