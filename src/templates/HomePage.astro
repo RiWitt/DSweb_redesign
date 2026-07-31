@@ -68,9 +68,9 @@ const partners = [
         <div class="label">{c.clientsLabel}</div>
         <p class="clients-desc">{c.clientsDesc}</p>
         <div class="client-row">
-          {clients.map((x) => <Img class={x.cls} src={x.src} alt={x.alt} widths={[240]} sizes="120px" />)}
+          {clients.map((x) => <Img class={x.cls} src={x.src} alt={x.alt} widths={[260]} sizes="130px" />)}
           <span class="chip-frame">
-            <Img src="client-slovenske-elektrarne.jpg" alt="Slovenské elektrárne" widths={[240]} sizes="120px" />
+            <Img src="client-slovenske-elektrarne.jpg" alt="Slovenské elektrárne" widths={[260]} sizes="130px" />
           </span>
         </div>
       </div>
@@ -203,16 +203,16 @@ const partners = [
           {
             partners.map((p) => (
               <a href={p.href} target="_blank" rel="noopener">
-                <Img class={p.cls} src={p.src} alt={p.alt} widths={[280, p.w]} sizes="140px" />
+                <Img class={p.cls} src={p.src} alt={p.alt} widths={[260, p.w]} sizes="130px" />
               </a>
             ))
           }
           {/* SVG: shipped as-is, nothing for the image pipeline to improve. */}
           <a href="https://www.hitachienergy.com" target="_blank" rel="noopener">
-            <img class="partner-img" src={asset('images/partner-hitachi-energy.svg')} alt="Hitachi Energy" width="140" height="58" />
+            <img class="partner-img" src={asset('images/partner-hitachi-energy.svg')} alt="Hitachi Energy" width="130" height="50" />
           </a>
           <a href="https://www.extremenetworks.com" target="_blank" rel="noopener">
-            <Img class="partner-img" src="partner-extreme-networks.jpg" alt="Extreme Networks" widths={[280, 500]} sizes="140px" />
+            <Img class="partner-img" src="partner-extreme-networks.jpg" alt="Extreme Networks" widths={[260, 500]} sizes="130px" />
           </a>
         </div>
       </div>
