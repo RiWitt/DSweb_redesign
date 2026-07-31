@@ -331,7 +331,26 @@ nav a.nav-primary{color:var(--red);font-weight:600;}
    The 24px rule that used to prefix every eyebrow is gone: decoration
    dressed as structure, and the trait shared with the worst-rated reference.
    ------------------------------------------------------------------------ */
-.eyebrow{font-size:12.5px;color:var(--red);margin-bottom:18px;display:block;}
+.eyebrow{font-size:13.5px;color:var(--red);margin-bottom:18px;display:block;}
+
+/* --- Chapter rail ---------------------------------------------------------
+   Revived on request: a thin red signal-dot + line marking each chapter's
+   copy block, echoing the original site's rail-and-signal motif. Scoped to
+   just the copy column (not a full-page spine) so it adapts cleanly to the
+   new full-width alternating bands and never affects layout width or
+   mobile readability — it's a self-contained accent on each block, not a
+   structural column like before.
+   ------------------------------------------------------------------------ */
+.svc-copy,.cred-copy{position:relative;padding-left:20px;}
+.svc-copy::before,.cred-copy::before{
+  content:'';position:absolute;left:0;top:6px;bottom:4px;width:1px;
+  background:var(--line);
+}
+.svc-copy::after,.cred-copy::after{
+  content:'';position:absolute;left:-4px;top:2px;width:9px;height:9px;
+  border-radius:50%;background:#fff;border:2px solid var(--red);
+}
+.svc--dark .svc-copy::before{background:var(--ink-line);}
 
 /* --- Buttons ------------------------------------------------------------ */
 .btn-primary,.btn-ghost{
@@ -365,7 +384,7 @@ nav a.nav-primary{color:var(--red);font-weight:600;}
 .clients-desc{font-size:14.5px;color:var(--gray);max-width:560px;margin-bottom:20px;}
 .client-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
 .chip-img,.chip-frame{
-  height:44px;width:120px;background:#fff;
+  height:50px;width:130px;background:#fff;
   border:1px solid var(--line);border-radius:var(--r-chip);
   filter:grayscale(1);opacity:.8;transition:filter .2s ease, opacity .2s ease;
 }
@@ -410,7 +429,7 @@ nav a.nav-primary{color:var(--red);font-weight:600;}
   background:#fff;padding:26px;border-radius:var(--r-img);
   border:1px solid var(--line);box-shadow:var(--shadow-card);
 }
-.svc--dark .svc-media--panel{background:var(--ink-card);border:none;box-shadow:none;padding:10px;}
+.svc--dark .svc-media--panel{background:transparent;border:1px solid #8B8D90;box-shadow:none;padding:6px;}
 .svc-media--panel img{height:auto;border-radius:6px;}
 
 /* Label sits in its own rail so the prose column doesn't strand the right half. */
@@ -469,7 +488,7 @@ a.feature:hover{transform:translateY(-2px);box-shadow:var(--shadow-card);border-
 .partner-row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
 .partner-row a{display:block;line-height:0;}
 .partner-img{
-  height:58px;width:140px;object-fit:contain;background:#fff;
+  height:50px;width:130px;object-fit:contain;background:#fff;
   border:1px solid var(--line);border-radius:var(--r-chip);padding:10px 16px;
   filter:grayscale(1);opacity:.8;transition:filter .2s ease, opacity .2s ease, border-color .2s ease;
 }
