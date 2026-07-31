@@ -331,7 +331,7 @@ nav a.nav-primary{color:var(--red);font-weight:600;}
    The 24px rule that used to prefix every eyebrow is gone: decoration
    dressed as structure, and the trait shared with the worst-rated reference.
    ------------------------------------------------------------------------ */
-.eyebrow{font-size:13.5px;color:var(--red);margin-bottom:18px;display:block;}
+.eyebrow{font-size:16px;color:var(--red);margin-bottom:18px;display:block;}
 
 /* --- Chapter rail ---------------------------------------------------------
    Revived on request: a thin red signal-dot + line marking each chapter's
@@ -351,6 +351,15 @@ nav a.nav-primary{color:var(--red);font-weight:600;}
   border-radius:50%;background:#fff;border:2px solid var(--red);
 }
 .svc--dark .svc-copy::before{background:var(--ink-line);}
+
+/* Centered variant of the chapter rail, for the final CTA's centered layout:
+   a short vertical line with a signal dot at its foot, sitting above the
+   eyebrow instead of beside it. */
+.rail-accent{width:1px;height:26px;background:var(--line);margin:0 auto 14px;position:relative;}
+.rail-accent::after{
+  content:'';position:absolute;left:50%;bottom:-6px;transform:translateX(-50%);
+  width:9px;height:9px;border-radius:50%;background:#fff;border:2px solid var(--red);
+}
 
 /* --- Buttons ------------------------------------------------------------ */
 .btn-primary,.btn-ghost{
